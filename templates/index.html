@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commander Selector</title>
+</head>
+<body>
+    <h1>Welcome to my Commader Project</h1>
+
+    <br><br>
+
+    <button id="random-btn">Random</button>
+
+    <br><br>
+
+    <img id="card-image" src="" alt="Card Image" style="max-width: 400px; display: none;">
+
+    <br><br>
+
+    <p>A BainneBoi creation</p>
+</body>
+<script>
+    document.getElementById("random-btn").addEventListener("click", function() {
+            fetch("/get-card")
+                .then(response => response.json())
+                .then(data => {
+                    if (data.card_url) {
+                        const cardImage = document.getElementById("card-image");
+                        cardImage.src = data.card_url;
+                        cardImage.style.display = "block";
+                    } else {
+                        alert("Error fetching card.");
+                    }
+                })
+                .catch(error => console.error("Error:", error));
+        });
+</script>
+</html>
