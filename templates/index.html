@@ -14,7 +14,9 @@
 
     <br><br>
 
-    <img id="card-image" src="" alt="Card Image" style="max-width: 400px; display: none;">
+    <a id="card-link" href="#" target="_blank" style="display: none;">
+    <img id="card-image" src="" alt="Card Image" style="max-width: 400px;">
+    </a>
 
     <br><br>
 
@@ -25,10 +27,15 @@
             fetch("/get-card")
                 .then(response => response.json())
                 .then(data => {
-                    if (data.card_url) {
+                    console.log("Data received from /get-card:", data);
+                    if (data.card_url && data.scryfall_url) {
                         const cardImage = document.getElementById("card-image");
+                        const cardLink = document.getElementById("card-link");
+
+                        cardLink.href = data.scryfall_url;
                         cardImage.src = data.card_url;
-                        cardImage.style.display = "block";
+
+                        cardLink.style.display = "block";
                     } else {
                         alert("Error fetching card.");
                     }

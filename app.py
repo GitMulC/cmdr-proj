@@ -10,7 +10,7 @@ def get_random_card():
     data = response.json()
 
     # Set vars for distunguishing illegal cmdrs
-    print("URL:", data["uri"])
+    print("URL:", data["scryfall_uri"])
     games = data["games"]
     typ = data["type_line"]
     oracle = data.get("oracle_text", "")
@@ -25,16 +25,16 @@ def get_random_card():
     # Check card against vars, returning either card or error_card
     if len(games) == 1 and games[0] == "arena":
         print("ARENA ONLY CARD!!!")
-        return error_card
+        return error_card, error_data["scryfall_uri"]
     elif len(games) == 1 and games[0] == "mtgo":
         print("MTGO ONLY CARD!!!")
-        return error_card
+        return error_card, error_data["scryfall_uri"]
     elif "Creature" not in typ and "can be your commander" not in oracle:
         print("NOT A LEGAL CMDR CARD!!!")
-        return error_card
+        return error_card, error_data["uri"]
     elif set_name in {"ugl" , "unh" , "ust" , "und" , "unf"}:
         print("UN-SET!!!")
-        return error_card
+        return error_card, error_data["scryfall_uri"]
     else:
         print("NORMAL CARD")
         if "image_uris" in data:
@@ -43,8 +43,8 @@ def get_random_card():
             card = data["card_faces"][0]["image_uris"]["normal"]
         else:
             print("NO IMAGE FOUND - returning error card")
-            return error_card
-        return card
+            return error_card, error_data["scryfall_uri"]
+        return card, data["scryfall_uri"]
 
 @app.route('/', methods = ["GET"])
 def cmdr():
@@ -53,11 +53,10 @@ def cmdr():
 
 @app.route("/get-card")
 def get_card():
-    card_url = get_random_card()
-    print(card_url)
+    card_url, scryfall_url = get_random_card()
     while card_url == "https://cards.scryfall.io/normal/front/6/1/61e9c6df-1c84-4eab-9076-a4feb6347c10.jpg?1566819829":
-        card_url = get_random_card()
-    return jsonify({"card_url": card_url})
+        card_url, scryfall_url = get_random_card()
+    return jsonify({"card_url": card_url, "scryfall_url": scryfall_url})
 
 
 if __name__ == "__main__":
