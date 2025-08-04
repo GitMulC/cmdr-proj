@@ -13,10 +13,10 @@ def get_random_card():
     print("URL:", data["uri"])
     games = data["games"]
     typ = data["type_line"]
-    oracle = data["oracle_text"]
+    oracle = data.get("oracle_text", "")
     set_name = data["set"]
 
-    # Setup error card, mental misstep for illegal cmdrs
+    # Setup error card, mental misstep for illegal cmdrs for comparisson later
     error_api_url = "https://api.scryfall.com/cards/61e9c6df-1c84-4eab-9076-a4feb6347c10"
     error_response = requests.get(error_api_url)
     error_data = error_response.json()
@@ -37,7 +37,13 @@ def get_random_card():
         return error_card
     else:
         print("NORMAL CARD")
-        card = data["image_uris"]["normal"]
+        if "image_uris" in data:
+            card = data["image_uris"]["normal"]
+        elif "card_faces" in data and data["card_faces"][0].get("image_uris"):
+            card = data["card_faces"][0]["image_uris"]["normal"]
+        else:
+            print("NO IMAGE FOUND - returning error card")
+            return error_card
         return card
 
 @app.route('/', methods = ["GET"])
@@ -48,6 +54,9 @@ def cmdr():
 @app.route("/get-card")
 def get_card():
     card_url = get_random_card()
+    print(card_url)
+    while card_url == "https://cards.scryfall.io/normal/front/6/1/61e9c6df-1c84-4eab-9076-a4feb6347c10.jpg?1566819829":
+        card_url = get_random_card()
     return jsonify({"card_url": card_url})
 
 
