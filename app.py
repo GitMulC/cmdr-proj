@@ -1,11 +1,12 @@
 import requests
 from flask import Flask, render_template, jsonify
+from datetime import datetime, date
 
 app = Flask(__name__)
 
 def get_random_card():
     # Inital API call to scryfall
-    api_url = "https://api.scryfall.com/cards/random?q=is%3Acommander"
+    api_url = "https://api.scryfall.com/cards/random?q=is%3Acommander+game%3Apaper"
     response = requests.get(api_url)
     data = response.json()
 
@@ -15,26 +16,25 @@ def get_random_card():
     typ = data["type_line"]
     oracle = data.get("oracle_text", "")
     set_name = data["set"]
+    release =  datetime.strptime(data["released_at"], "%Y-%m-%d").date()
+    today = date.today()
 
-    # Setup error card, mental misstep for illegal cmdrs for comparisson later
-    error_api_url = "https://api.scryfall.com/cards/61e9c6df-1c84-4eab-9076-a4feb6347c10"
-    error_response = requests.get(error_api_url)
-    error_data = error_response.json()
-    error_card = error_data["image_uris"]["normal"]
-
-    # Check card against vars, returning either card or error_card
+    # Check card against vars, returning either card, scryfall_url or None, None
     if len(games) == 1 and games[0] == "arena":
         print("ARENA ONLY CARD!!!")
-        return error_card, error_data["scryfall_uri"]
+        return None, None
     elif len(games) == 1 and games[0] == "mtgo":
         print("MTGO ONLY CARD!!!")
-        return error_card, error_data["scryfall_uri"]
+        return None, None
     elif "Creature" not in typ and "can be your commander" not in oracle:
         print("NOT A LEGAL CMDR CARD!!!")
-        return error_card, error_data["uri"]
+        return None, None
     elif set_name in {"ugl" , "unh" , "ust" , "und" , "unf"}:
         print("UN-SET!!!")
-        return error_card, error_data["scryfall_uri"]
+        return None, None
+    elif release > today:
+        print("NOT RELEASED YET!!!")
+        return None, None
     else:
         print("NORMAL CARD")
         if "image_uris" in data:
@@ -42,8 +42,8 @@ def get_random_card():
         elif "card_faces" in data and data["card_faces"][0].get("image_uris"):
             card = data["card_faces"][0]["image_uris"]["normal"]
         else:
-            print("NO IMAGE FOUND - returning error card")
-            return error_card, error_data["scryfall_uri"]
+            print("NO IMAGE FOUND!!!")
+            return None, None
         return card, data["scryfall_uri"]
 
 @app.route('/', methods = ["GET"])
@@ -54,7 +54,7 @@ def cmdr():
 @app.route("/get-card")
 def get_card():
     card_url, scryfall_url = get_random_card()
-    while card_url == "https://cards.scryfall.io/normal/front/6/1/61e9c6df-1c84-4eab-9076-a4feb6347c10.jpg?1566819829":
+    while card_url is None or scryfall_url is None:
         card_url, scryfall_url = get_random_card()
     return jsonify({"card_url": card_url, "scryfall_url": scryfall_url})
 
