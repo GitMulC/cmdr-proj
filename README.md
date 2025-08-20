@@ -6,4 +6,5 @@
     * python app.py
 
 2. Tailwind - CSS
+    * npm install
     * npm run build:css
