@@ -5,23 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Commander Selector</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!--For LiveServer prototyping-->
+    <link rel="stylesheet" href="../static/css/style.css">
 </head>
 <body>
-    <h1 class="text-center text-blue-600">Welcome to my Commader Project</h1>
+    <div class="container mx-auto">
+        <h1 class="flex justify-center text-center text-lg text-blue-600">Welcome to my Commader Project</h1>
 
-    <br><br>
+        <br><br>
 
-    <button id="random-btn">Random</button>
+        <div class="flex justify-center">
+            <a id="card-link" href="#" target="_blank" style="display: none;">
+            <img id="card-image" src="" alt="Card Image" style="max-width: 400px;">
+            </a>
+        </div>
 
-    <br><br>
+        <div type="button" class="flex justify-center mt-4">
+            <button class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" id="random-btn">Random Commander</button>
+        </div>
 
-    <a id="card-link" href="#" target="_blank" style="display: none;">
-    <img id="card-image" src="" alt="Card Image" style="max-width: 400px;">
-    </a>
-
-    <br><br>
-
-    <p>A BainneBoi creation</p>
+        <br><br>
+        <footer class="flex justify-center">
+            <p>A BainneBoi creation</p>
+        </footer>
+    </div>
 </body>
 <script>
     document.getElementById("random-btn").addEventListener("click", function() {
