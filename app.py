@@ -20,13 +20,13 @@ def get_random_card():
     today = date.today()
 
     # Check card against vars, returning either card, scryfall_url or None, None
-    if len(games) == 1 and games[0] == "arena":
-        print("ARENA ONLY CARD!!!")
-        return None, None
-    elif len(games) == 1 and games[0] == "mtgo":
-        print("MTGO ONLY CARD!!!")
-        return None, None
-    elif "Creature" not in typ and "can be your commander" not in oracle:
+    # if len(games) == 1 and games[0] == "arena":
+    #     print("ARENA ONLY CARD!!!")
+    #     return None, None
+    # elif len(games) == 1 and games[0] == "mtgo":
+    #     print("MTGO ONLY CARD!!!")
+    #     return None, None
+    if "Creature" not in typ and "can be your commander" not in oracle:
         print("NOT A LEGAL CMDR CARD!!!")
         return None, None
     elif set_name in {"ugl" , "unh" , "ust" , "und" , "unf"}:
