@@ -9,26 +9,31 @@
     <link rel="stylesheet" href="../static/css/style.css">
 </head>
 <body>
-    <div class="container mx-auto">
-        <h1 class="flex justify-center text-center text-lg text-blue-600">Welcome to my Commader Project</h1>
+        <header class="w-full bg-brand-500">
+            <h1 class="flex justify-center text-center text-2xl text-white">Random Commander</h1>
+        </header>
 
         <br><br>
 
         <div class="flex justify-center">
+            <a id="default" href="#" style="display: block">
+            <img id="default-card" src="https://backs.scryfall.io/large/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg?1677416389" alt="Back face of Magic Card" style="max-width: 400px;">
+            </a>
+
             <a id="card-link" href="#" target="_blank" style="display: none;">
             <img id="card-image" src="" alt="Card Image" style="max-width: 400px;">
             </a>
         </div>
 
         <div type="button" class="flex justify-center mt-4">
-            <button class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" id="random-btn">Random Commander</button>
+            <button class="text-white bg-brand hover:bg-brand-900 focus:outline-none focus:ring-4 focus:ring-brand-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-brand-800 dark:hover:bg-brand-700 dark:focus:ring-brand-700 dark:border-brand-700" 
+            id="random-btn">Random Commander</button>
         </div>
 
         <br><br>
-        <footer class="flex justify-center">
-            <p>A BainneBoi creation</p>
+        <footer class="flex justify-center w-full bg-brand-500">
+            <p class="text-white">A BainneBoi creation</p>
         </footer>
-    </div>
 </body>
 <script>
     document.getElementById("random-btn").addEventListener("click", function() {
@@ -37,12 +42,14 @@
                 .then(data => {
                     console.log("Data received from /get-card:", data);
                     if (data.card_url && data.scryfall_url) {
+                        const defaultImage = document.getElementById("default");
                         const cardImage = document.getElementById("card-image");
                         const cardLink = document.getElementById("card-link");
 
                         cardLink.href = data.scryfall_url;
                         cardImage.src = data.card_url;
 
+                        defaultImage.style.display = "none";
                         cardLink.style.display = "block";
                     } else {
                         alert("Error fetching card.");
