@@ -8,7 +8,7 @@
     <!--For LiveServer prototyping-->
     <link rel="stylesheet" href="../static/css/style.css">
 </head>
-<body>
+<body class="min-h-screen flex flex-col font-sans">
         <header class="w-full bg-brand-500">
             <h1 class="flex justify-center text-center text-2xl text-white">Random Commander</h1>
         </header>
@@ -16,12 +16,22 @@
         <br><br>
 
         <div class="flex justify-center">
-            <a id="default" href="#" style="display: block">
-            <img id="default-card" src="https://backs.scryfall.io/large/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg?1677416389" alt="Back face of Magic Card" style="max-width: 400px;">
+            <a id="default" href="#" class="block">
+            <img 
+                id="default-card" 
+                src="https://backs.scryfall.io/large/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg?1677416389" 
+                alt="Back face of Magic Card"
+                class="h-[70vh] max-w-[100%] w-auto rounded-lg shadow-lg"
+            >
             </a>
 
-            <a id="card-link" href="#" target="_blank" style="display: none;">
-            <img id="card-image" src="" alt="Card Image" style="max-width: 400px;">
+            <a id="card-link" href="#" target="_blank" class="hidden">
+            <img 
+                id="card-image" 
+                src="" 
+                alt="Card Image"
+                class="h-[70vh] max-w-[400px] w-auto rounded-lg shadow-lg"
+            >
             </a>
         </div>
 
@@ -31,8 +41,11 @@
         </div>
 
         <br><br>
-        <footer class="flex justify-center w-full bg-brand-500">
-            <p class="text-white">A BainneBoi creation</p>
+        <footer class="fixed bottom-0 left-0 flex justify-center w-full bg-brand-500">
+            <ul class="text-white text-sm text-center">
+                <li>A BainneBoi Creation</li>
+                <li>If you enjoy this app feel free to tip me on <a href="#"><u>Ko-Fi</u></a></li>
+            </ul>
         </footer>
 </body>
 <script>
@@ -49,8 +62,8 @@
                         cardLink.href = data.scryfall_url;
                         cardImage.src = data.card_url;
 
-                        defaultImage.style.display = "none";
-                        cardLink.style.display = "block";
+                        defaultImage.classList.add("hidden");
+                        cardLink.classList.remove("hidden");
                     } else {
                         alert("Error fetching card.");
                     }
