@@ -1,4 +1,4 @@
-import requests
+import requests, random
 from flask import Flask, render_template, jsonify
 from datetime import datetime, date
 
@@ -18,14 +18,69 @@ def get_random_card():
     set_name = data["set"]
     release =  datetime.strptime(data["released_at"], "%Y-%m-%d").date()
     today = date.today()
+    layout = data["layout"]
 
     # Check card against vars, returning either card, scryfall_url or None, None
-    # if len(games) == 1 and games[0] == "arena":
-    #     print("ARENA ONLY CARD!!!")
-    #     return None, None
-    # elif len(games) == 1 and games[0] == "mtgo":
-    #     print("MTGO ONLY CARD!!!")
-    #     return None, None
+    if "Creature" not in typ and "can be your commander" not in oracle:
+        print("NOT A LEGAL CMDR CARD!!!")
+        return None, None
+    elif set_name in {"ugl" , "unh" , "ust" , "und" , "unf"}:
+        print("UN-SET!!!")
+        return None, None
+    elif release > today:
+        print("NOT RELEASED YET!!!")
+        return None, None
+    print("NORMAL CARD")
+
+    # Single-faced card
+    if "image_uris" in data:
+        card = data["image_uris"]["normal"]
+
+    # Multi-faced card
+    elif "card_faces" in data and layout != "transform":
+        legal_faces = []
+
+        for face in data["card_faces"]:
+            type_line = face.get("type_line", "")
+            oracle = face.get("oracle_text", "")
+
+            # Check if this face is commander-legal
+            if "Legendary Creature" in type_line or "can be your commander" in oracle:
+                if "image_uris" in face:
+                    legal_faces.append(face["image_uris"]["normal"])
+
+        if legal_faces:
+            # Pick a random legal face
+            card = random.choice(legal_faces)
+        else:
+            # fallback: pick first face image if no legal face found
+            if data["card_faces"][0].get("image_uris"):
+                card = data["card_faces"][0]["image_uris"]["normal"]
+            else:
+                print("NO IMAGE FOUND!!!")
+                return None, None
+
+    else:
+        print("NO IMAGE FOUND!!!")
+        return None, None
+
+    return card, data.get("scryfall_uri")
+
+def get_random_partner():
+    # Inital API call to scryfall
+    api_url = "https://api.scryfall.com/cards/random?q=is:commander+o:\"Partner\"+-o:\"Partner with\"+game:paper"
+    response = requests.get(api_url)
+    data = response.json()
+
+    # Set vars for distunguishing illegal cmdrs
+    print("URL:", data["scryfall_uri"])
+    typ = data["type_line"]
+    oracle = data.get("oracle_text", "")
+    set_name = data["set"]
+    release =  datetime.strptime(data["released_at"], "%Y-%m-%d").date()
+    today = date.today()
+
+    # Check card against vars, returning either card, scryfall_url or None, None
     if "Creature" not in typ and "can be your commander" not in oracle:
         print("NOT A LEGAL CMDR CARD!!!")
         return None, None
@@ -36,20 +91,20 @@ def get_random_card():
         print("NOT RELEASED YET!!!")
         return None, None
     else:
-        print("NORMAL CARD")
-        if "image_uris" in data:
-            card = data["image_uris"]["normal"]
-        elif "card_faces" in data and data["card_faces"][0].get("image_uris"):
-            card = data["card_faces"][0]["image_uris"]["normal"]
-        else:
-            print("NO IMAGE FOUND!!!")
-            return None, None
+        print("NORMAL PARTNER")
+        card = data["image_uris"]["normal"]
         return card, data["scryfall_uri"]
 
 @app.route('/', methods = ["GET"])
 def cmdr():
     card_url = get_random_card()
-    return render_template('index.html', card_url=card_url)
+    partner_1_url = get_random_partner()
+    partner_2_url = get_random_partner()
+    return render_template('index.html', 
+                            card_url=card_url, 
+                            partner_1_url=partner_1_url, 
+                            partner_2_url=partner_2_url
+                            )
 
 @app.route("/get-card")
 def get_card():
@@ -57,6 +112,19 @@ def get_card():
     while card_url is None or scryfall_url is None:
         card_url, scryfall_url = get_random_card()
     return jsonify({"card_url": card_url, "scryfall_url": scryfall_url})
+
+@app.route("/get-partner")
+def get_partner():
+    partner_1_url, partner_1_scryfall = get_random_partner()
+    partner_2_url, partner_2_scryfall = get_random_partner()
+    while partner_1_url is None or partner_1_scryfall is None or partner_2_url is None or partner_2_scryfall is None:
+        partner_1_url, partner_1_scryfall = get_random_partner()
+        partner_2_url, partner_2_scryfall = get_random_partner()
+    return jsonify({"partner_1_url": partner_1_url, 
+                    "partner_1_scryfall": partner_1_scryfall, 
+                    "partner_2_url": partner_2_url, 
+                    "partner_2_scryfall":partner_2_scryfall
+                    })
 
 
 if __name__ == "__main__":
