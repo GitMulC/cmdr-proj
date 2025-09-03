@@ -15,14 +15,14 @@
 
         <br><br>
 
-        <div class="flex justify-center">
-            <a id="default" href="#" class="block">
+        <div class="flex justify-center space-x-2">
+            <a id="default" href="#" class="inline-block">
             <img 
                 id="default-card" 
                 src="https://backs.scryfall.io/large/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg?1677416389" 
                 alt="Back face of Magic Card"
-                class="h-[70vh] max-w-[100%] w-auto rounded-lg shadow-lg"
-            >
+                class="h-[70vh] max-w-[400px] w-auto rounded-lg shadow-lg"
+                >
             </a>
 
             <a id="card-link" href="#" target="_blank" class="hidden">
@@ -31,13 +31,37 @@
                 src="" 
                 alt="Card Image"
                 class="h-[70vh] max-w-[400px] w-auto rounded-lg shadow-lg"
-            >
+                >
+            </a>
+
+            <a id="partner-1-link" href="#" target="_blank" class="hidden">
+                <img 
+                    id="partner-1-image" 
+                    src="" 
+                    alt="Card Image"
+                    class="h-[70vh] max-w-[400px] w-auto rounded-lg shadow-lg"
+                >
+            </a>
+            <a id="partner-2-link" href="#" target="_blank" class="hidden">
+                <img 
+                    id="partner-2-image" 
+                    src="" 
+                    alt="Card Image"
+                    class="h-[70vh] max-w-[400px] w-auto rounded-lg shadow-lg"
+                >
             </a>
         </div>
 
         <div type="button" class="flex justify-center mt-4">
-            <button class="text-white bg-brand hover:bg-brand-900 focus:outline-none focus:ring-4 focus:ring-brand-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-brand-800 dark:hover:bg-brand-700 dark:focus:ring-brand-700 dark:border-brand-700" 
-            id="random-btn">Random Commander</button>
+            <button 
+                class="text-white bg-brand hover:bg-brand-900 focus:outline-none focus:ring-4 focus:ring-brand-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-brand-800 dark:hover:bg-brand-700 dark:focus:ring-brand-700 dark:border-brand-700" 
+                id="random-partner-btn">Partner Commander</button>
+            <button 
+                class="text-white bg-brand hover:bg-brand-900 focus:outline-none focus:ring-4 focus:ring-brand-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-brand-800 dark:hover:bg-brand-700 dark:focus:ring-brand-700 dark:border-brand-700" 
+                id="random-btn">Random Commander</button>
+            <button 
+                class="text-white bg-brand hover:bg-brand-900 focus:outline-none focus:ring-4 focus:ring-brand-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-brand-800 dark:hover:bg-brand-700 dark:focus:ring-brand-700 dark:border-brand-700" 
+                id="random-bkgr-btn">Background Commander</button>
         </div>
 
         <br><br>
@@ -49,21 +73,50 @@
         </footer>
 </body>
 <script>
+    const defaultImage = document.getElementById("default");
+    const cardImage = document.getElementById("card-image");
+    const cardLink = document.getElementById("card-link");
+    const cardImage_1 = document.getElementById("partner-1-image");
+    const cardImage_2 = document.getElementById("partner-2-image");
+    const cardLink_1 = document.getElementById("partner-1-link");
+    const cardLink_2 = document.getElementById("partner-2-link");
+
     document.getElementById("random-btn").addEventListener("click", function() {
             fetch("/get-card")
                 .then(response => response.json())
                 .then(data => {
                     console.log("Data received from /get-card:", data);
                     if (data.card_url && data.scryfall_url) {
-                        const defaultImage = document.getElementById("default");
-                        const cardImage = document.getElementById("card-image");
-                        const cardLink = document.getElementById("card-link");
-
                         cardLink.href = data.scryfall_url;
                         cardImage.src = data.card_url;
 
                         defaultImage.classList.add("hidden");
                         cardLink.classList.remove("hidden");
+                        cardLink_1.classList.add("hidden");
+                        cardLink_2.classList.add("hidden");
+                    } else {
+                        alert("Error fetching card.");
+                    }
+                })
+                .catch(error => console.error("Error:", error));
+        });
+    
+    document.getElementById("random-partner-btn").addEventListener("click", function() {
+            fetch("/get-partner")
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Data received from /get-partner:", data);
+                    if (data.partner_1_url && data.partner_1_scryfall && data.partner_2_url && data.partner_2_scryfall) {
+                        cardLink_1.href = data.partner_1_scryfall;
+                        cardImage_1.src = data.partner_1_url;
+
+                        cardLink_2.href = data.partner_2_scryfall;
+                        cardImage_2.src = data.partner_2_url;
+
+                        defaultImage.classList.add("hidden");
+                        cardLink.classList.add("hidden");
+                        cardLink_1.classList.remove("hidden");
+                        cardLink_2.classList.remove("hidden");
                     } else {
                         alert("Error fetching card.");
                     }
