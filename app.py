@@ -95,15 +95,67 @@ def get_random_partner():
         card = data["image_uris"]["normal"]
         return card, data["scryfall_uri"]
 
+def get_random_bkgr_cmdr():
+    # Inital API call to scryfall
+    api_url = "https://api.scryfall.com/cards/random?q=is:commander+o:\"Choose a background\"+game:paper"
+    response = requests.get(api_url)
+    data = response.json()
+
+    # Set vars for distunguishing illegal cmdrs
+    print("URL:", data["scryfall_uri"])
+    set_name = data["set"]
+    release =  datetime.strptime(data["released_at"], "%Y-%m-%d").date()
+    today = date.today()
+
+    # Check card against vars, returning either card, scryfall_url or None, None
+    if set_name in {"ugl" , "unh" , "ust" , "und" , "unf"}:
+        print("UN-SET!!!")
+        return None, None
+    elif release > today:
+        print("NOT RELEASED YET!!!")
+        return None, None
+    else:
+        print("NORMAL BACKGROUND COMMANDER")
+        card = data["image_uris"]["normal"]
+        return card, data["scryfall_uri"]
+
+def get_random_bkgr():
+    # Inital API call to scryfall
+    api_url = "https://api.scryfall.com/cards/random?q=is:commander+t:legendary+t:background+game:paper"
+    response = requests.get(api_url)
+    data = response.json()
+
+    # Set vars for distunguishing illegal cmdrs
+    print("URL:", data["scryfall_uri"])
+    set_name = data["set"]
+    release =  datetime.strptime(data["released_at"], "%Y-%m-%d").date()
+    today = date.today()
+
+    # Check card against vars, returning either card, scryfall_url or None, None
+    if set_name in {"ugl" , "unh" , "ust" , "und" , "unf"}:
+        print("UN-SET!!!")
+        return None, None
+    elif release > today:
+        print("NOT RELEASED YET!!!")
+        return None, None
+    else:
+        print("NORMAL BACKGROUND")
+        card = data["image_uris"]["normal"]
+        return card, data["scryfall_uri"]
+
 @app.route('/', methods = ["GET"])
 def cmdr():
     card_url = get_random_card()
     partner_1_url = get_random_partner()
     partner_2_url = get_random_partner()
+    bkgr_cmdr = get_random_bkgr_cmdr()
+    bkgr = get_random_bkgr()
     return render_template('index.html', 
                             card_url=card_url, 
                             partner_1_url=partner_1_url, 
-                            partner_2_url=partner_2_url
+                            partner_2_url=partner_2_url,
+                            bkgr_cmdr=bkgr_cmdr,
+                            bkgr=bkgr
                             )
 
 @app.route("/get-card")
@@ -126,6 +178,18 @@ def get_partner():
                     "partner_2_scryfall":partner_2_scryfall
                     })
 
+@app.route("/get-bkgr")
+def get_bkgr():
+    bkgr_cmdr, bkgr_cmdr_scryfall = get_random_bkgr_cmdr()
+    bkgr, bkgr_scryfall = get_random_bkgr()
+    while bkgr_cmdr is None or bkgr_cmdr_scryfall is None or bkgr is None or bkgr_scryfall is None:
+        bkgr_cmdr, bkgr_cmdr_scryfall = get_random_bkgr_cmdr()
+        bkgr, bkgr_scryfall = get_random_bkgr()
+    return jsonify({"bkgr_cmdr": bkgr_cmdr,
+                    "bkgr_cmdr_scryfall": bkgr_cmdr_scryfall,
+                    "bkgr":bkgr,
+                    "bkgr_scryfall": bkgr_scryfall
+                    })
 
 if __name__ == "__main__":
     app.run(debug=True)
