@@ -15,7 +15,7 @@
 
         <br><br>
 
-        <div class="flex justify-center space-x-2">
+        <div class="flex flex-col sm:flex-row items-center justify-center sm:space-x-2 space-y-2 sm:space-y-0">
             <a id="default" href="#" class="inline-block">
             <img 
                 id="default-card" 
@@ -34,7 +34,7 @@
                 >
             </a>
 
-            <a id="partner-1-link" href="#" target="_blank" class="hidden">
+            <a id="partner-1-link" href="#" target="_blank" class="hidden inline-block">
                 <img 
                     id="partner-1-image" 
                     src="" 
@@ -42,9 +42,28 @@
                     class="h-[70vh] max-w-[400px] w-auto rounded-lg shadow-lg"
                 >
             </a>
-            <a id="partner-2-link" href="#" target="_blank" class="hidden">
+
+            <a id="partner-2-link" href="#" target="_blank" class="hidden inline-block">
                 <img 
                     id="partner-2-image" 
+                    src="" 
+                    alt="Card Image"
+                    class="h-[70vh] max-w-[400px] w-auto rounded-lg shadow-lg"
+                >
+            </a>
+
+            <a id="bkgr-cmdr-link" href="#" target="_blank" class="hidden inline-block">
+                <img 
+                    id="bkgr-cmdr-image" 
+                    src="" 
+                    alt="Card Image"
+                    class="h-[70vh] max-w-[400px] w-auto rounded-lg shadow-lg"
+                >
+            </a>
+
+            <a id="bkgr-link" href="#" target="_blank" class="hidden inline-block">
+                <img 
+                    id="bkgr-image" 
                     src="" 
                     alt="Card Image"
                     class="h-[70vh] max-w-[400px] w-auto rounded-lg shadow-lg"
@@ -74,12 +93,19 @@
 </body>
 <script>
     const defaultImage = document.getElementById("default");
+
     const cardImage = document.getElementById("card-image");
     const cardLink = document.getElementById("card-link");
+
     const cardImage_1 = document.getElementById("partner-1-image");
     const cardImage_2 = document.getElementById("partner-2-image");
     const cardLink_1 = document.getElementById("partner-1-link");
     const cardLink_2 = document.getElementById("partner-2-link");
+
+    const bkgrCmdrImage = document.getElementById("bkgr-cmdr-image");
+    const bkgrImage = document.getElementById("bkgr-image");
+    const bkgrCmdrLink = document.getElementById("bkgr-cmdr-link");
+    const bkgrLink = document.getElementById("bkgr-link");
 
     document.getElementById("random-btn").addEventListener("click", function() {
             fetch("/get-card")
@@ -94,6 +120,8 @@
                         cardLink.classList.remove("hidden");
                         cardLink_1.classList.add("hidden");
                         cardLink_2.classList.add("hidden");
+                        bkgrCmdrLink.classList.add("hidden");
+                        bkgrLink.classList.add("hidden");
                     } else {
                         alert("Error fetching card.");
                     }
@@ -117,6 +145,33 @@
                         cardLink.classList.add("hidden");
                         cardLink_1.classList.remove("hidden");
                         cardLink_2.classList.remove("hidden");
+                        bkgrCmdrLink.classList.add("hidden");
+                        bkgrLink.classList.add("hidden");
+                    } else {
+                        alert("Error fetching card.");
+                    }
+                })
+                .catch(error => console.error("Error:", error));
+        });
+
+        document.getElementById("random-bkgr-btn").addEventListener("click", function() {
+            fetch("/get-bkgr")
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Data received from /get-bkgr:", data);
+                    if (data.bkgr_cmdr && data.bkgr_cmdr_scryfall && data.bkgr && data.bkgr_scryfall) {
+                        bkgrCmdrLink.href = data.bkgr_cmdr_scryfall;
+                        bkgrCmdrImage.src = data.bkgr_cmdr;
+
+                        bkgrLink.href = data.bkgr_scryfall;
+                        bkgrImage.src = data.bkgr;
+
+                        defaultImage.classList.add("hidden");
+                        cardLink.classList.add("hidden");
+                        cardLink_1.classList.add("hidden");
+                        cardLink_2.classList.add("hidden");
+                        bkgrCmdrLink.classList.remove("hidden");
+                        bkgrLink.classList.remove("hidden");
                     } else {
                         alert("Error fetching card.");
                     }
