@@ -3,72 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Commander Selector</title>
+    <title>whatsmycommander.io</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <!--For LiveServer prototyping-->
     <link rel="stylesheet" href="../static/css/style.css">
 </head>
 <body class="min-h-screen flex flex-col font-sans">
         <header class="w-full bg-brand-500">
-            <h1 class="flex justify-center text-center text-2xl text-white">Random Commander</h1>
+            <h1 class="flex justify-center text-center text-2xl text-white">What's My Commander</h1>
         </header>
 
         <br><br>
 
-        <div class="flex flex-col sm:flex-row items-center justify-center sm:space-x-2 space-y-2 sm:space-y-0">
-            <a id="default" href="#" class="inline-block">
-            <img 
-                id="default-card" 
-                src="https://backs.scryfall.io/large/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg?1677416389" 
-                alt="Back face of Magic Card"
-                class="h-[70vh] max-w-[400px] w-auto rounded-lg shadow-lg"
-                >
-            </a>
+        <div class="flex justify-center mt-4">
 
-            <a id="card-link" href="#" target="_blank" class="hidden">
-            <img 
-                id="card-image" 
-                src="" 
-                alt="Card Image"
-                class="h-[70vh] max-w-[400px] w-auto rounded-lg shadow-lg"
-                >
-            </a>
-
-            <a id="partner-1-link" href="#" target="_blank" class="hidden inline-block">
+            <div class="relative inline-flex flex-col sm:flex-row items-center">
+                
+                <div id="card-spinner" class="hidden absolute inset-0 flex items-center justify-center bg-black bg-opacity-40 z-10">
+                    <div class="animate-spin h-10 w-10 border-4 border-blue-500 border-t-transparent rounded-full"></div>
+                </div>
+                <a id="default" href="#" class="inline-block">
                 <img 
-                    id="partner-1-image" 
+                    id="default-card" 
+                    src="https://backs.scryfall.io/large/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg?1677416389" 
+                    alt="Back face of Magic Card"
+                    class="h-[70vh] max-w-[400px] w-auto rounded-lg shadow-lg"
+                    >
+                </a>
+
+                <a id="card-link" href="#" target="_blank" class="hidden inline-block">
+                <img 
+                    id="card-image" 
                     src="" 
                     alt="Card Image"
                     class="h-[70vh] max-w-[400px] w-auto rounded-lg shadow-lg"
-                >
-            </a>
+                    >
+                </a>
 
-            <a id="partner-2-link" href="#" target="_blank" class="hidden inline-block">
-                <img 
-                    id="partner-2-image" 
-                    src="" 
-                    alt="Card Image"
-                    class="h-[70vh] max-w-[400px] w-auto rounded-lg shadow-lg"
-                >
-            </a>
+                <a id="partner-1-link" href="#" target="_blank" class="hidden inline-block mr-2 last:mr-0">
+                    <img 
+                        id="partner-1-image" 
+                        src="" 
+                        alt="Card Image"
+                        class="h-[70vh] max-w-[400px] w-auto rounded-lg shadow-lg"
+                    >
+                </a>
 
-            <a id="bkgr-cmdr-link" href="#" target="_blank" class="hidden inline-block">
-                <img 
-                    id="bkgr-cmdr-image" 
-                    src="" 
-                    alt="Card Image"
-                    class="h-[70vh] max-w-[400px] w-auto rounded-lg shadow-lg"
-                >
-            </a>
+                <a id="partner-2-link" href="#" target="_blank" class="hidden inline-block">
+                    <img 
+                        id="partner-2-image" 
+                        src="" 
+                        alt="Card Image"
+                        class="h-[70vh] max-w-[400px] w-auto rounded-lg shadow-lg"
+                    >
+                </a>
 
-            <a id="bkgr-link" href="#" target="_blank" class="hidden inline-block">
-                <img 
-                    id="bkgr-image" 
-                    src="" 
-                    alt="Card Image"
-                    class="h-[70vh] max-w-[400px] w-auto rounded-lg shadow-lg"
-                >
-            </a>
+                <a id="bkgr-cmdr-link" href="#" target="_blank" class="hidden inline-block mr-2 last:mr-0">
+                    <img 
+                        id="bkgr-cmdr-image" 
+                        src="" 
+                        alt="Card Image"
+                        class="h-[70vh] max-w-[400px] w-auto rounded-lg shadow-lg"
+                    >
+                </a>
+
+                <a id="bkgr-link" href="#" target="_blank" class="hidden inline-block">
+                    <img 
+                        id="bkgr-image" 
+                        src="" 
+                        alt="Card Image"
+                        class="h-[70vh] max-w-[400px] w-auto rounded-lg shadow-lg"
+                    >
+                </a>
+            </div>
         </div>
 
         <div type="button" class="flex justify-center mt-4">
@@ -94,26 +101,44 @@
 <script>
     const defaultImage = document.getElementById("default");
 
+    // Vars for regular commander
     const cardImage = document.getElementById("card-image");
     const cardLink = document.getElementById("card-link");
 
+    // Vars for partner commander
     const cardImage_1 = document.getElementById("partner-1-image");
     const cardImage_2 = document.getElementById("partner-2-image");
     const cardLink_1 = document.getElementById("partner-1-link");
     const cardLink_2 = document.getElementById("partner-2-link");
 
+    // Vars for background commander
     const bkgrCmdrImage = document.getElementById("bkgr-cmdr-image");
     const bkgrImage = document.getElementById("bkgr-image");
     const bkgrCmdrLink = document.getElementById("bkgr-cmdr-link");
     const bkgrLink = document.getElementById("bkgr-link");
 
+    // Vars for loading animation
+    const cardSpinner = document.getElementById("card-spinner");
+
+    function showLoading() {
+        cardSpinner.classList.remove("hidden");
+    }
+
+    function hideLoading() {
+        cardSpinner.classList.add("hidden");
+    }
+
     document.getElementById("random-btn").addEventListener("click", function() {
+            showLoading();
+
             fetch("/get-card")
                 .then(response => response.json())
                 .then(data => {
                     console.log("Data received from /get-card:", data);
                     if (data.card_url && data.scryfall_url) {
                         cardLink.href = data.scryfall_url;
+
+                        cardImage.onload = () => hideLoading();
                         cardImage.src = data.card_url;
 
                         defaultImage.classList.add("hidden");
@@ -124,21 +149,36 @@
                         bkgrLink.classList.add("hidden");
                     } else {
                         alert("Error fetching card.");
+                        hideLoading();
                     }
                 })
-                .catch(error => console.error("Error:", error));
+                .catch(error => {
+                console.error("Error:", error);
+                hideLoading();
+                });
         });
     
     document.getElementById("random-partner-btn").addEventListener("click", function() {
+            showLoading();
+
             fetch("/get-partner")
                 .then(response => response.json())
                 .then(data => {
                     console.log("Data received from /get-partner:", data);
                     if (data.partner_1_url && data.partner_1_scryfall && data.partner_2_url && data.partner_2_scryfall) {
                         cardLink_1.href = data.partner_1_scryfall;
-                        cardImage_1.src = data.partner_1_url;
-
                         cardLink_2.href = data.partner_2_scryfall;
+
+                        let loaded = 0;
+                        const checkDone = () => {
+                            loaded++;
+                            if (loaded === 2) hideLoading();
+                        }
+
+                        cardImage_1.onload = checkDone;
+                        cardImage_2.onload = checkDone;
+
+                        cardImage_1.src = data.partner_1_url;
                         cardImage_2.src = data.partner_2_url;
 
                         defaultImage.classList.add("hidden");
@@ -149,21 +189,36 @@
                         bkgrLink.classList.add("hidden");
                     } else {
                         alert("Error fetching card.");
+                        hideLoading();
                     }
                 })
-                .catch(error => console.error("Error:", error));
+                .catch(error => {
+                console.error("Error:", error);
+                hideLoading();
+                });
         });
 
         document.getElementById("random-bkgr-btn").addEventListener("click", function() {
+            showLoading();
+
             fetch("/get-bkgr")
                 .then(response => response.json())
                 .then(data => {
                     console.log("Data received from /get-bkgr:", data);
                     if (data.bkgr_cmdr && data.bkgr_cmdr_scryfall && data.bkgr && data.bkgr_scryfall) {
                         bkgrCmdrLink.href = data.bkgr_cmdr_scryfall;
-                        bkgrCmdrImage.src = data.bkgr_cmdr;
-
                         bkgrLink.href = data.bkgr_scryfall;
+
+                        let loaded = 0;
+                        const checkDone = () => {
+                            loaded++;
+                            if (loaded === 2) hideLoading();
+                        }
+
+                        bkgrCmdrImage.onload = checkDone;
+                        bkgrImage.onload = checkDone;
+
+                        bkgrCmdrImage.src = data.bkgr_cmdr;
                         bkgrImage.src = data.bkgr;
 
                         defaultImage.classList.add("hidden");
@@ -174,9 +229,13 @@
                         bkgrLink.classList.remove("hidden");
                     } else {
                         alert("Error fetching card.");
+                        hideLoading();
                     }
                 })
-                .catch(error => console.error("Error:", error));
+                .catch(error => {
+                console.error("Error:", error);
+                hideLoading();
+                });
         });
 </script>
 </html>
