@@ -15,3 +15,7 @@
 - Buy Me a Coffee
 - PayPal.me
 - Stripe Payment Link
+
+### References
+- [Scryfall](https://scryfall.com/docs/api)
+- [SVGs](https://github.com/Investigamer/mtg-vectors/tree/main) 
