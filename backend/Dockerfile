@@ -5,7 +5,7 @@ FROM python:3.10.5
 WORKDIR /app
 
 #Install Dependencies
-COPY requirements.txt .
+COPY backend/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy App Code
