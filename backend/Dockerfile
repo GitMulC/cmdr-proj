@@ -1,15 +1,15 @@
 # lightweight Python Image
-FROM python:3.10.5
+FROM python:3.10.5-slim
 
 # Workdir
-WORKDIR /app
+WORKDIR /app/backend
 
 #Install Dependencies
 COPY backend/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy App Code
-COPY . .
+COPY backend/ .
 
 # Expose Port
 EXPOSE 5000
