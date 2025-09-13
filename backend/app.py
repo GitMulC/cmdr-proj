@@ -1,8 +1,10 @@
 import requests, random
 from flask import Flask, render_template, jsonify
 from datetime import datetime, date
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 def get_random_card():
     # Inital API call to scryfall

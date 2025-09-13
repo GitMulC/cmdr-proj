@@ -586,28 +586,16 @@ video {
   left: 0px;
 }
 
-.left-\[0\.5rem\] {
-  left: 0.5rem;
-}
-
 .top-12 {
   top: 3rem;
 }
 
-.top-\[3rem\] {
-  top: 3rem;
-}
-
-.top-24 {
-  top: 6rem;
-}
-
-.top-6 {
-  top: 1.5rem;
-}
-
 .top-3 {
   top: 0.75rem;
+}
+
+.top-\[3rem\] {
+  top: 3rem;
 }
 
 .z-10 {
@@ -637,14 +625,6 @@ video {
 
 .mt-4 {
   margin-top: 1rem;
-}
-
-.mt-2 {
-  margin-top: 0.5rem;
-}
-
-.mt-1 {
-  margin-top: 0.25rem;
 }
 
 .block {
