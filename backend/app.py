@@ -149,6 +149,7 @@ def get_random_bkgr():
 
 @app.route('/', methods = ["GET"])
 def cmdr():
+    return "Hello from WhatsMyCommander on Render!!!"
     card_url = get_random_card()
     partner_1_url = get_random_partner()
     partner_2_url = get_random_partner()
@@ -164,6 +165,7 @@ def cmdr():
 
 @app.route("/get-card")
 def get_card():
+    return jsonify({"message": "/get-card running on Render!!!"})
     card_url, scryfall_url = get_random_card()
     while card_url is None or scryfall_url is None:
         card_url, scryfall_url = get_random_card()
