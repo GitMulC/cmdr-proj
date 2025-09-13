@@ -149,12 +149,15 @@ def get_random_bkgr():
 
 @app.route('/', methods = ["GET"])
 def cmdr():
-    return "Hello from WhatsMyCommander on Render!!!"
     card_url = get_random_card()
     partner_1_url = get_random_partner()
     partner_2_url = get_random_partner()
     bkgr_cmdr = get_random_bkgr_cmdr()
     bkgr = get_random_bkgr()
+
+    # Log msgs for Render
+    print("Hello from WhatsMyCommander on Render")
+    
     return render_template('index.html', 
                             card_url=card_url, 
                             partner_1_url=partner_1_url, 
@@ -165,10 +168,13 @@ def cmdr():
 
 @app.route("/get-card")
 def get_card():
-    return jsonify({"message": "/get-card running on Render!!!"})
     card_url, scryfall_url = get_random_card()
     while card_url is None or scryfall_url is None:
         card_url, scryfall_url = get_random_card()
+
+    # Log msgs for Render
+    print("Card fetched:", scryfall_url)
+
     return jsonify({"card_url": card_url, "scryfall_url": scryfall_url})
 
 @app.route("/get-partner")
@@ -178,6 +184,10 @@ def get_partner():
     while partner_1_url is None or partner_1_scryfall is None or partner_2_url is None or partner_2_scryfall is None:
         partner_1_url, partner_1_scryfall = get_random_partner()
         partner_2_url, partner_2_scryfall = get_random_partner()
+    
+    # Log msgs for Render
+    print("Partners fetched:", partner_1_scryfall, partner_2_scryfall)
+
     return jsonify({"partner_1_url": partner_1_url, 
                     "partner_1_scryfall": partner_1_scryfall, 
                     "partner_2_url": partner_2_url, 
@@ -191,6 +201,10 @@ def get_bkgr():
     while bkgr_cmdr is None or bkgr_cmdr_scryfall is None or bkgr is None or bkgr_scryfall is None:
         bkgr_cmdr, bkgr_cmdr_scryfall = get_random_bkgr_cmdr()
         bkgr, bkgr_scryfall = get_random_bkgr()
+
+    # Log msgs for Render
+    print("Background cmdrs fetched:", bkgr_cmdr_scryfall, bkgr_scryfall)
+
     return jsonify({"bkgr_cmdr": bkgr_cmdr,
                     "bkgr_cmdr_scryfall": bkgr_cmdr_scryfall,
                     "bkgr":bkgr,

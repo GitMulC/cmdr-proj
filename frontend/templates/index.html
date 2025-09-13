@@ -579,6 +579,12 @@
         </footer>
 </body>
 <script>
+    // Vars for backend deployment (Render)
+    const API_BASE = ["localhost", "127.0.0.1"].includes(window.location.hostname)
+    ? "http://localhost:5000"
+    : "https://cmdr-app.onrender.com";
+
+    
     const defaultImage = document.getElementById("default");
 
     // Vars for regular commander
@@ -628,7 +634,7 @@
     document.getElementById("random-btn").addEventListener("click", function() {
             showLoading();
 
-            fetch("/get-card")
+            fetch(`${API_BASE}/get-card`)
                 .then(response => response.json())
                 .then(data => {
                     console.log("Data received from /get-card:", data);
@@ -658,7 +664,7 @@
     document.getElementById("random-partner-btn").addEventListener("click", function() {
             showLoading();
 
-            fetch("/get-partner")
+            fetch(`${API_BASE}/get-partner`)
                 .then(response => response.json())
                 .then(data => {
                     console.log("Data received from /get-partner:", data);
@@ -698,7 +704,7 @@
         document.getElementById("random-bkgr-btn").addEventListener("click", function() {
             showLoading();
 
-            fetch("/get-bkgr")
+            fetch(`${API_BASE}/get-bkgr`)
                 .then(response => response.json())
                 .then(data => {
                     console.log("Data received from /get-bkgr:", data);
