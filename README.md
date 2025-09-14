@@ -8,7 +8,9 @@
 2. Tailwind - CSS
     * npm install
     * npm run build:css
+    
     * npx tailwindcss -i ./src/input.css -o ../css/style.css --minify
+    * cp frontend/static/css/style.css css/style.css
 
 
 ### Sponsors
