@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tailwindcss -i ./src/input.css -o ./static/css/style.css --minify",
     "build:css": "tailwindcss -i ./src/input.css -o ./static/css/style.css --watch"
   },
   "keywords": [],
