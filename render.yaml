@@ -1,6 +1,14 @@
 services:
-  - type: web
+  - name: backend
+    type: web
     name: cmdr-backend
     env: docker
     rootDir: backend
+    plan: free
+
+  - name: frontend
+    type: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: templates
     plan: free
