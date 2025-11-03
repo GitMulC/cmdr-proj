@@ -604,11 +604,13 @@
                 .then(response => response.json())
                 .then(data => {
                     console.log("Data received from /get-card:", data);
-                    if (data.card_url && data.scryfall_url) {
+                    if (data.card_url && data.scryfall_url && data.small_card_url) {
                         cardLink.href = data.scryfall_url;
 
+                        const imgSrc = window.innerWidth < 768 ? data.small_card_url : data.card_url;
+
                         cardImage.onload = () => hideLoading();
-                        cardImage.src = data.card_url;
+                        cardImage.src = imgSrc;
 
                         defaultImage.classList.add("hidden");
                         cardLink.classList.remove("hidden");
@@ -634,7 +636,7 @@
                 .then(response => response.json())
                 .then(data => {
                     console.log("Data received from /get-partner:", data);
-                    if (data.partner_1_url && data.partner_1_scryfall && data.partner_2_url && data.partner_2_scryfall) {
+                    if (data.partner_1_url && data.small_card_1_url && data.partner_1_scryfall && data.partner_2_url && data.small_card_2_url && data.partner_2_scryfall) {
                         cardLink_1.href = data.partner_1_scryfall;
                         cardLink_2.href = data.partner_2_scryfall;
 
@@ -644,11 +646,14 @@
                             if (loaded === 2) hideLoading();
                         }
 
+                        const imgSrc_1 = window.innerWidth < 768 ? data.small_card_1_url : data.partner_1_url;
+                        const imgSrc_2 = window.innerWidth < 768 ? data.small_card_2_url : data.partner_2_url;
+
                         cardImage_1.onload = checkDone;
                         cardImage_2.onload = checkDone;
 
-                        cardImage_1.src = data.partner_1_url;
-                        cardImage_2.src = data.partner_2_url;
+                        cardImage_1.src = imgSrc_1;
+                        cardImage_2.src = imgSrc_2;
 
                         defaultImage.classList.add("hidden");
                         cardLink.classList.add("hidden");
@@ -684,11 +689,14 @@
                             if (loaded === 2) hideLoading();
                         }
 
+                        const imgSrc_1 = window.innerWidth < 768 ? data.small_bkgr_cmdr : data.bkgr_cmdr;
+                        const imgSrc_2 = window.innerWidth < 768 ? data.small_bkgr : data.bkgr;
+
                         bkgrCmdrImage.onload = checkDone;
                         bkgrImage.onload = checkDone;
 
-                        bkgrCmdrImage.src = data.bkgr_cmdr;
-                        bkgrImage.src = data.bkgr;
+                        bkgrCmdrImage.src = imgSrc_1;
+                        bkgrImage.src = imgSrc_2;
 
                         defaultImage.classList.add("hidden");
                         cardLink.classList.add("hidden");
