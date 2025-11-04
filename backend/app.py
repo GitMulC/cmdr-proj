@@ -37,14 +37,24 @@ def get_random_card():
         return None, None, scryfall_uri
     print("NORMAL CARD")
 
-    # Single-faced card
-    if "image_uris" in data:
-        image_uris = data["image_uris"]
-        normal_img = image_uris.get("normal")
-        small_img = image_uris.get("small", normal_img)
-
     # Multi-faced card
-    elif "card_faces" in data and layout in ("transform", "modal_dfc", "split", "flip", "adventure"):
+    if "card_faces" in data and layout in ("transform", "modal_dfc", "split", "flip", "adventure"):
+        # Specifically for Spider modal_dfc !!!
+        if layout == "modal_dfc" and data["set"] == "spm":
+            first_face = data["card_faces"][0]
+            if "image_uris" in first_face:
+                normal_img = first_face["image_uris"].get("normal")
+                small_img = first_face["image_uris"].get("small", normal_img)
+                return normal_img, small_img, scryfall_uri
+
+        # For transform cards, so only front one is selected
+        if "transform" in layout:
+            first_face = data["card_faces"][0]
+            if "image_uris" in first_face:
+                normal_img = first_face["image_uris"].get("normal")
+                small_img = first_face["image_uris"].get("small", normal_img)
+                return normal_img, small_img, scryfall_uri
+
         legal_faces = []
 
         for face in data["card_faces"]:
@@ -75,6 +85,12 @@ def get_random_card():
             else:
                 print("NO IMAGE FOUND!!!")
                 return None, None, scryfall_uri
+
+    # Single-faced card
+    elif "image_uris" in data:
+        image_uris = data["image_uris"]
+        normal_img = image_uris.get("normal")
+        small_img = image_uris.get("small", normal_img)
 
     else:
         print("NO IMAGE FOUND!!!")
