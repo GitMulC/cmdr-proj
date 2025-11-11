@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,549 +9,392 @@
     <!--For LiveServer prototyping-->
     <link rel="stylesheet" href="../static/css/style.css">
 </head>
+
 <body class="min-h-screen flex flex-col font-sans">
     <header class="w-full bg-brand-500">
         <h1 class="flex justify-center text-center text-2xl text-white">What's My Commander</h1>
     </header>
-
-        <!-- Container for the dropdown -->
-        <div class="relative inline-block top-3 left-0 z-50" id="legend-dropdown">
-            <!-- Hamburger button -->
-            <button 
-            id="menu-btn"
-            class="bg-brand-500 text-white p-2 rounded-lg shadow flex items-center bg-opacity-60"
-            >
+    <!-- Container for the dropdown -->
+    <div class="relative inline-block top-3 left-0 z-50" id="legend-dropdown">
+        <!-- Hamburger button -->
+        <button id="menu-btn"
+            class="bg-brand-500 text-white p-2 rounded-lg shadow flex items-center bg-opacity-60 lg:hidden">
             <!-- hamburger icon -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M4 6h16M4 12h16M4 18h16" />
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
             <h2 class="font-bold text-sm">Legend</h2>
-            </button>
-  
-            <!-- Dropdown content -->
-            <div 
-            id="menu"
-            class="hidden absolute z-50 left-0 bg-brand-500 text-white rounded-lg shadow-lg w-48 p-4 text-sm bg-opacity-60"
-            >
-                <!-- <div class="flex justify-between items-center mb-2">
-                    <h2 class="font-bold text-sm">Legend</h2>
-                </div> -->
-                <ul class="space-y-1 text-xs">
+        </button>
+
+        <!-- Dropdown content -->
+        <div id="menu"
+            class="hidden absolute z-50 left-0 bg-brand-500 text-white rounded-lg shadow-lg w-48 p-4 text-sm bg-opacity-60 lg:hidden">
+            <ul class="space-y-1 text-xs">
+                <li class="flex items-center font-bold">
+                    Random commander:
+                </li>
+                <li class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        viewBox="0 0 138.38248 206.14454" preserveAspectRatio="xMidYMid meet"
+                        class="w-6 h-6 block flex-shrink-0" role="img" aria-hidden="true">
+                        <defs>
+                            <linearGradient id="linearGradient4136">
+                                <stop offset="0" style="stop-color:#bf331c" />
+                                <stop offset="0.5" style="stop-color:#f6b91d" />
+                                <stop offset="1" style="stop-color:#bf331c" />
+                            </linearGradient>
+
+                            <linearGradient id="linearGradient4142-icon1" xlink:href="#linearGradient4136"
+                                x1="72.518425" y1="77.896126" x2="271.06964" y2="209.85271"
+                                gradientUnits="userSpaceOnUse" gradientTransform="translate(-80.808763,-47.558594)" />
+                        </defs>
+
+                        <g transform="rotate(-90,103.07226,103.07227)">
+                            <g transform="rotate(90,103.07226,103.07227)">
+                                <path style="fill:url(#linearGradient4142-icon1)"
+                                    d="m 69.191237,22.980468 -65.6562505,19.023438 5.050781,80.808594 21.0429695,34.17383 39.5625,34.34375 39.562503,-34.34375 21.04297,-34.17383 5.05078,-80.808594 z" />
+                                <path
+                                    d="m 69.191237,0 c -3.73784,6.630214 -10.66975,13.015198 -18.60352,14.5625 0,0 3.77688,3.861632 7.45899,9.201172 -24.28504,13.447379 -57.71093946,11.33789 -57.71093946,11.33789 0.307232,29.496924 -3.19355404,71.542528 7.07031296,92.591798 11.4338605,23.4487 30.0723665,47.18004 58.5859365,64.31055 l 3.19922,14.14062 3.19922,-14.14062 c 28.513573,-17.13051 47.152083,-40.86185 58.585943,-64.31055 10.26387,-21.04927 6.76308,-63.094874 7.07031,-92.591798 0,0 -33.4259,2.109489 -57.710943,-11.33789 3.68211,-5.33954 7.45899,-9.201172 7.45899,-9.201172 C 79.860987,13.015198 72.929077,6.630214 69.191237,0 Z m -7.05859,30.685547 c 1.67177,3.433135 2.85133,7.030879 2.82812,10.392578 -0.10691,15.483741 -21.95868,18.897171 -41.28711,17.339841 -3.15276,38.4625 -1.69908,55.736084 8.2207,69.814464 9.27755,13.16687 17.53504,22.07708 31.94336,33.91601 l 1.50782,20.89258 C 45.617297,167.3119 33.491007,156.12208 19.697097,135.60547 6.3202825,115.70924 8.1549295,84.581456 7.9119395,43.18164 c 0,0 31.2727175,4.008205 54.2207075,-12.496093 z m 14.11718,0 c 22.94799,16.504298 54.220713,12.496093 54.220713,12.496093 -0.24299,41.399816 1.59166,72.5276 -11.78516,92.42383 -13.79391,20.51661 -25.920203,31.70643 -45.648443,47.43555 l 1.50782,-20.89258 c 14.40832,-11.83893 22.66582,-20.74914 31.943363,-33.91601 9.91979,-14.07838 11.37346,-31.351964 8.2207,-69.814464 -19.328433,1.55733 -41.180203,-1.8561 -41.287113,-17.339841 -0.0232,-3.361699 1.15635,-6.959443 2.82812,-10.392578 z m -46.62109,33.876949 c 0,0 11.35456,6.24214 27.27344,1.51563 l 6.22265,86.203124 c -11.323,-8.14015 -17.36391,-13.66663 -27.39257,-30.54687 -7.35771,-12.3845 -5.87354,-42.604704 -6.10352,-57.171884 z m 79.125003,0 c -0.22998,14.56718 1.25419,44.787384 -6.10352,57.171884 -10.028663,16.88024 -16.069573,22.40672 -27.392573,30.54687 l 6.22265,-86.203124 c 15.91888,4.72651 27.273443,-1.51563 27.273443,-1.51563 z" />
+                            </g>
+                        </g>
+                    </svg>= Partner
+                </li>
+                <li class="flex items-center">
+                    <svg viewBox="0 0 600 648" class="w-6 h-6" version="1.1" id="svg6"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:svg="http://www.w3.org/2000/svg">
+                        <defs id="defs6" />
+                        <linearGradient x1="0" y1="0" x2="1" y2="0" id="linearGradient748-icon1"
+                            gradientUnits="userSpaceOnUse"
+                            gradientTransform="matrix(33.133789,0,0,-33.133789,216.36719,34.720703)" spreadMethod="pad">
+                            <stop style="stop-color:#bf331c" offset="0" id="stop1" />
+                            <stop style="stop-color:#d3641c" offset="0.39999399" id="stop2" />
+                            <stop style="stop-color:#f6b91d" offset="0.5" id="stop3" />
+                            <stop style="stop-color:#d3641c" offset="0.69999701" id="stop4" />
+                            <stop style="stop-color:#bf331c" offset="1" id="stop5" />
+                        </linearGradient>
+                        <linearGradient x1="0" y1="0" x2="1" y2="0" id="linearGradient2998-icon1"
+                            xlink:href="#linearGradient748-icon1" gradientUnits="userSpaceOnUse"
+                            gradientTransform="matrix(526.04449,0,0,526.04449,36.979096,326.73637)"
+                            spreadMethod="pad" />
+                        <path
+                            d="M 593.64945,642.24288 H 6.3505502 V 499.97468 L 21.036198,492.1635 V 204.21367 L 171.43311,132.10317 V 75.345119 L 300,7.1878394 428.55102,75.345119 v 56.758051 l 150.39691,72.1105 V 492.1635 l 14.70152,7.81118 z"
+                            style="stroke:#000000;stroke-width:12.7011" id="path5" />
+                        <path
+                            d="M 202.13802,93.761719 V 388.6654 L 300,336.74965 397.86198,388.6654 V 93.761719 L 300,41.925349 Z m 230.57261,312.574091 115.53238,55.4403 V 223.50346 L 432.71063,168.12666 Z M 51.741109,223.50346 V 461.77611 L 167.2735,406.33581 V 168.12666 Z M 36.97608,518.40715 v 93.1467 h 526.03196 v -93.1467 L 300,378.67916 Z"
+                            style="fill:url(#linearGradient2998-icon1)" id="path6" />
+                    </svg>= Single
+                </li>
+                <li class="flex items-center">
+                    <svg class="w-6 h-6 block flex-shrink-0" viewBox="0 0 354.904 485.001" version="1.1" id="Layer_1"
+                        enable-background="new 0 0 375 500" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:svg="http://www.w3.org/2000/svg">
+                        <defs id="defs48" />
+                        <g id="g43" transform="translate(-9.766,-7.079)">
+                            <path
+                                d="m 187.22,56.432 c 43.3,0 59.06,-49.353 59.06,-49.353 l 118.39,93.201 c 0,0 -7.54,178.82 -7.77,185.49 -0.56,15.72 -7.1,30.47 -11.28,40.74 -15.11,36.94 -72.24,116.75 -148.23,165.57 H 177.05 C 101.06,443.26 43.93,363.45 28.83,326.51 24.634,316.24 18.093,301.49 17.543,285.77 17.306,279.09 9.766,100.28 9.766,100.28 L 128.15,7.079 c 0,0 15.76,49.353 59.07,49.353 z"
+                                id="path2" />
+
+                            <linearGradient id="SVGID_1_instance1" gradientUnits="userSpaceOnUse" x1="26.257"
+                                y1="247.09" x2="348.17001" y2="247.09" gradientTransform="matrix(1,0,0,-1,0,501)">
+                                <stop offset="0" style="stop-color:#BB2C26" id="stop4" />
+                                <stop offset="0.0098" style="stop-color:#BD2F26" id="stop6" />
+                                <stop offset="0.1368" style="stop-color:#D05724" id="stop8" />
+                                <stop offset="0.238" style="stop-color:#DC6F23" id="stop10" />
+                                <stop offset="0.3" style="stop-color:#E07823" id="stop12" />
+                                <stop offset="0.3053" style="stop-color:#E17A23" id="stop14" />
+                                <stop offset="0.3616" style="stop-color:#EE8B1F" id="stop16" />
+                                <stop offset="0.4232" style="stop-color:#F5951E" id="stop18" />
+                                <stop offset="0.5" style="stop-color:#F7981D" id="stop20" />
+                                <stop offset="0.5768" style="stop-color:#F5951E" id="stop22" />
+                                <stop offset="0.6384" style="stop-color:#EE8B1F" id="stop24" />
+                                <stop offset="0.6947" style="stop-color:#E17A23" id="stop26" />
+                                <stop offset="0.7" style="stop-color:#E07823" id="stop28" />
+                                <stop offset="0.762" style="stop-color:#DC6F23" id="stop30" />
+                                <stop offset="0.8632" style="stop-color:#D05724" id="stop32" />
+                                <stop offset="0.9902" style="stop-color:#BD2F26" id="stop34" />
+                                <stop offset="1" style="stop-color:#BB2C26" id="stop36" />
+                            </linearGradient>
+                            <path fill="url(#SVGID_1_instance1)"
+                                d="M 181.83,476.5 C 94.47,417.26 43.611,329.91 40.619,312.56 c -1.995,-11.57 -1.199,-21.75 2.396,-30.53 8.374,26.33 24.728,56.25 49.063,89.76 26.042,34.72 51.882,59.11 77.542,73.14 h 35.2 c 25.64,-14.03 51.49,-38.41 77.54,-73.14 24.33,-33.51 40.69,-63.43 49.06,-89.76 v 0 c 3.58,8.78 4.39,18.96 2.39,30.53 -2.99,17.35 -53.85,104.7 -141.21,163.94 z m 5.39,-397.912 -14.96,44.282 -52.66,31.11 -46.671,-11.96 32.311,37.1 v 62.23 l -32.311,37.1 47.271,-12.58 51.46,31.72 15.56,49.06 15.56,-49.06 51.46,-31.72 47.27,12.58 -32.32,-37.1 v -62.23 l 32.32,-37.1 -46.68,11.96 -52.65,-31.11 z M 26.257,127.06 c 37.517,50.94 39.847,96.61 6.991,137 l -1.009,1.22 z m 321.913,0 -5.99,138.21 -1,-1.22 C 308.33,223.67 310.66,178 348.17,127.06 Z M 174.05,430.42 C 117.41,391.34 76.917,336.48 52.587,265.87 84.183,222.04 76.676,169.21 30.075,107.39 l -1.425,-1.87 93.95,-74.2 c 13.42,27.65 34.67,41.215 63.73,40.704 h 0.89 0.88 c 29.07,0.512 50.31,-13.053 63.74,-40.704 l 93.95,74.2 -1.42,1.87 c -46.61,61.82 -54.11,114.65 -22.52,158.48 -24.34,70.61 -64.82,125.47 -121.47,164.55 z"
+                                id="path39" style="fill:url(#SVGID_1_instance1)" />
+                            <polygon fill="#ffffff"
+                                points="250.64,246.73 187.22,285.62 123.79,246.73 123.79,173.13 187.22,134.84 250.64,173.13 "
+                                id="polygon41" />
+                        </g>
+                    </svg>= Background
+                </li>
+            </ul>
+        </div>
+        <div class="hidden lg:flex flex-col gap-4 absolute left-0 top-3 z-50">
+
+            <div>
+                <!-- block #1 -->
+                <ul class="relative inline-block text-xs bg-brand-500 text-white rounded-lg shadow-lg p-4 bg-opacity-60">
                     <li class="flex items-center font-bold">
                         Random commander:
                     </li>
                     <li class="flex items-center">
-                        <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        xmlns:xlink="http://www.w3.org/1999/xlink"
-                        viewBox="0 0 138.38248 206.14454"
-                        preserveAspectRatio="xMidYMid meet"
-                        class="w-6 h-6 block flex-shrink-0"
-                        role="img"
-                        aria-hidden="true"
-                    >
-                        <defs>
-                        <linearGradient id="linearGradient4136">
-                            <stop offset="0" style="stop-color:#bf331c" />
-                            <stop offset="0.5" style="stop-color:#f6b91d" />
-                            <stop offset="1" style="stop-color:#bf331c" />
-                        </linearGradient>
-    
-                        <linearGradient
-                            id="linearGradient4142-icon1"
-                            xlink:href="#linearGradient4136"
-                            x1="72.518425"
-                            y1="77.896126"
-                            x2="271.06964"
-                            y2="209.85271"
-                            gradientUnits="userSpaceOnUse"
-                            gradientTransform="translate(-80.808763,-47.558594)"
-                        />
-                        </defs>
-    
-                        <g transform="rotate(-90,103.07226,103.07227)">
-                        <g transform="rotate(90,103.07226,103.07227)">
-                            <path
-                            style="fill:url(#linearGradient4142-icon1)"
-                            d="m 69.191237,22.980468 -65.6562505,19.023438 5.050781,80.808594 21.0429695,34.17383 39.5625,34.34375 39.562503,-34.34375 21.04297,-34.17383 5.05078,-80.808594 z"
-                            />
-                            <path
-                            d="m 69.191237,0 c -3.73784,6.630214 -10.66975,13.015198 -18.60352,14.5625 0,0 3.77688,3.861632 7.45899,9.201172 -24.28504,13.447379 -57.71093946,11.33789 -57.71093946,11.33789 0.307232,29.496924 -3.19355404,71.542528 7.07031296,92.591798 11.4338605,23.4487 30.0723665,47.18004 58.5859365,64.31055 l 3.19922,14.14062 3.19922,-14.14062 c 28.513573,-17.13051 47.152083,-40.86185 58.585943,-64.31055 10.26387,-21.04927 6.76308,-63.094874 7.07031,-92.591798 0,0 -33.4259,2.109489 -57.710943,-11.33789 3.68211,-5.33954 7.45899,-9.201172 7.45899,-9.201172 C 79.860987,13.015198 72.929077,6.630214 69.191237,0 Z m -7.05859,30.685547 c 1.67177,3.433135 2.85133,7.030879 2.82812,10.392578 -0.10691,15.483741 -21.95868,18.897171 -41.28711,17.339841 -3.15276,38.4625 -1.69908,55.736084 8.2207,69.814464 9.27755,13.16687 17.53504,22.07708 31.94336,33.91601 l 1.50782,20.89258 C 45.617297,167.3119 33.491007,156.12208 19.697097,135.60547 6.3202825,115.70924 8.1549295,84.581456 7.9119395,43.18164 c 0,0 31.2727175,4.008205 54.2207075,-12.496093 z m 14.11718,0 c 22.94799,16.504298 54.220713,12.496093 54.220713,12.496093 -0.24299,41.399816 1.59166,72.5276 -11.78516,92.42383 -13.79391,20.51661 -25.920203,31.70643 -45.648443,47.43555 l 1.50782,-20.89258 c 14.40832,-11.83893 22.66582,-20.74914 31.943363,-33.91601 9.91979,-14.07838 11.37346,-31.351964 8.2207,-69.814464 -19.328433,1.55733 -41.180203,-1.8561 -41.287113,-17.339841 -0.0232,-3.361699 1.15635,-6.959443 2.82812,-10.392578 z m -46.62109,33.876949 c 0,0 11.35456,6.24214 27.27344,1.51563 l 6.22265,86.203124 c -11.323,-8.14015 -17.36391,-13.66663 -27.39257,-30.54687 -7.35771,-12.3845 -5.87354,-42.604704 -6.10352,-57.171884 z m 79.125003,0 c -0.22998,14.56718 1.25419,44.787384 -6.10352,57.171884 -10.028663,16.88024 -16.069573,22.40672 -27.392573,30.54687 l 6.22265,-86.203124 c 15.91888,4.72651 27.273443,-1.51563 27.273443,-1.51563 z"
-                            />
-                        </g>
-                        </g>
-                    </svg>= Partner
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                            viewBox="0 0 138.38248 206.14454" preserveAspectRatio="xMidYMid meet"
+                            class="w-6 h-6 block flex-shrink-0" role="img" aria-hidden="true">
+                            <defs>
+                                <linearGradient id="linearGradient4136-desktop">
+                                    <stop offset="0" style="stop-color:#bf331c" />
+                                    <stop offset="0.5" style="stop-color:#f6b91d" />
+                                    <stop offset="1" style="stop-color:#bf331c" />
+                                </linearGradient>
+
+                                <linearGradient id="linearGradient4142-icon1-desktop" xlink:href="#linearGradient4136-desktop"
+                                    x1="72.518425" y1="77.896126" x2="271.06964" y2="209.85271"
+                                    gradientUnits="userSpaceOnUse" gradientTransform="translate(-80.808763,-47.558594)" />
+                            </defs>
+
+                            <g transform="rotate(-90,103.07226,103.07227)">
+                                <g transform="rotate(90,103.07226,103.07227)">
+                                    <path style="fill:url(#linearGradient4142-icon1-desktop)"
+                                        d="m 69.191237,22.980468 -65.6562505,19.023438 5.050781,80.808594 21.0429695,34.17383 39.5625,34.34375 39.562503,-34.34375 21.04297,-34.17383 5.05078,-80.808594 z" />
+                                    <path
+                                        d="m 69.191237,0 c -3.73784,6.630214 -10.66975,13.015198 -18.60352,14.5625 0,0 3.77688,3.861632 7.45899,9.201172 -24.28504,13.447379 -57.71093946,11.33789 -57.71093946,11.33789 0.307232,29.496924 -3.19355404,71.542528 7.07031296,92.591798 11.4338605,23.4487 30.0723665,47.18004 58.5859365,64.31055 l 3.19922,14.14062 3.19922,-14.14062 c 28.513573,-17.13051 47.152083,-40.86185 58.585943,-64.31055 10.26387,-21.04927 6.76308,-63.094874 7.07031,-92.591798 0,0 -33.4259,2.109489 -57.710943,-11.33789 3.68211,-5.33954 7.45899,-9.201172 7.45899,-9.201172 C 79.860987,13.015198 72.929077,6.630214 69.191237,0 Z m -7.05859,30.685547 c 1.67177,3.433135 2.85133,7.030879 2.82812,10.392578 -0.10691,15.483741 -21.95868,18.897171 -41.28711,17.339841 -3.15276,38.4625 -1.69908,55.736084 8.2207,69.814464 9.27755,13.16687 17.53504,22.07708 31.94336,33.91601 l 1.50782,20.89258 C 45.617297,167.3119 33.491007,156.12208 19.697097,135.60547 6.3202825,115.70924 8.1549295,84.581456 7.9119395,43.18164 c 0,0 31.2727175,4.008205 54.2207075,-12.496093 z m 14.11718,0 c 22.94799,16.504298 54.220713,12.496093 54.220713,12.496093 -0.24299,41.399816 1.59166,72.5276 -11.78516,92.42383 -13.79391,20.51661 -25.920203,31.70643 -45.648443,47.43555 l 1.50782,-20.89258 c 14.40832,-11.83893 22.66582,-20.74914 31.943363,-33.91601 9.91979,-14.07838 11.37346,-31.351964 8.2207,-69.814464 -19.328433,1.55733 -41.180203,-1.8561 -41.287113,-17.339841 -0.0232,-3.361699 1.15635,-6.959443 2.82812,-10.392578 z m -46.62109,33.876949 c 0,0 11.35456,6.24214 27.27344,1.51563 l 6.22265,86.203124 c -11.323,-8.14015 -17.36391,-13.66663 -27.39257,-30.54687 -7.35771,-12.3845 -5.87354,-42.604704 -6.10352,-57.171884 z m 79.125003,0 c -0.22998,14.56718 1.25419,44.787384 -6.10352,57.171884 -10.028663,16.88024 -16.069573,22.40672 -27.392573,30.54687 l 6.22265,-86.203124 c 15.91888,4.72651 27.273443,-1.51563 27.273443,-1.51563 z" />
+                                </g>
+                            </g>
+                        </svg>= Partner
                     </li>
                     <li class="flex items-center">
-                        <svg
-                        viewBox="0 0 600 648" class="w-6 h-6"
-                        version="1.1"
-                        id="svg6"
-                        xmlns:xlink="http://www.w3.org/1999/xlink"
-                        xmlns="http://www.w3.org/2000/svg"
-                        xmlns:svg="http://www.w3.org/2000/svg">
-                    <defs
-                        id="defs6" />
-                    <linearGradient
-                        x1="0"
-                        y1="0"
-                        x2="1"
-                        y2="0"
-                        id="linearGradient748-icon1"
-                        gradientUnits="userSpaceOnUse"
-                        gradientTransform="matrix(33.133789,0,0,-33.133789,216.36719,34.720703)"
-                        spreadMethod="pad">
-                        <stop
-                        style="stop-color:#bf331c"
-                        offset="0"
-                        id="stop1" />
-                        <stop
-                        style="stop-color:#d3641c"
-                        offset="0.39999399"
-                        id="stop2" />
-                        <stop
-                        style="stop-color:#f6b91d"
-                        offset="0.5"
-                        id="stop3" />
-                        <stop
-                        style="stop-color:#d3641c"
-                        offset="0.69999701"
-                        id="stop4" />
-                        <stop
-                        style="stop-color:#bf331c"
-                        offset="1"
-                        id="stop5" />
-                    </linearGradient>
-                    <linearGradient
-                        x1="0"
-                        y1="0"
-                        x2="1"
-                        y2="0"
-                        id="linearGradient2998-icon1"
-                        xlink:href="#linearGradient748-icon1"
-                        gradientUnits="userSpaceOnUse"
-                        gradientTransform="matrix(526.04449,0,0,526.04449,36.979096,326.73637)"
-                        spreadMethod="pad" />
-                    <path
-                        d="M 593.64945,642.24288 H 6.3505502 V 499.97468 L 21.036198,492.1635 V 204.21367 L 171.43311,132.10317 V 75.345119 L 300,7.1878394 428.55102,75.345119 v 56.758051 l 150.39691,72.1105 V 492.1635 l 14.70152,7.81118 z"
-                        style="stroke:#000000;stroke-width:12.7011"
-                        id="path5" />
-                    <path
-                        d="M 202.13802,93.761719 V 388.6654 L 300,336.74965 397.86198,388.6654 V 93.761719 L 300,41.925349 Z m 230.57261,312.574091 115.53238,55.4403 V 223.50346 L 432.71063,168.12666 Z M 51.741109,223.50346 V 461.77611 L 167.2735,406.33581 V 168.12666 Z M 36.97608,518.40715 v 93.1467 h 526.03196 v -93.1467 L 300,378.67916 Z"
-                        style="fill:url(#linearGradient2998-icon1)"
-                        id="path6" />
-                    </svg>= Single
+                        <svg viewBox="0 0 600 648" class="w-6 h-6" version="1.1" id="svg6"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:svg="http://www.w3.org/2000/svg">
+                            <defs id="defs6" />
+                            <linearGradient x1="0" y1="0" x2="1" y2="0" id="linearGradient748-icon1-desktop"
+                                gradientUnits="userSpaceOnUse"
+                                gradientTransform="matrix(33.133789,0,0,-33.133789,216.36719,34.720703)" spreadMethod="pad">
+                                <stop style="stop-color:#bf331c" offset="0" id="stop1" />
+                                <stop style="stop-color:#d3641c" offset="0.39999399" id="stop2" />
+                                <stop style="stop-color:#f6b91d" offset="0.5" id="stop3" />
+                                <stop style="stop-color:#d3641c" offset="0.69999701" id="stop4" />
+                                <stop style="stop-color:#bf331c" offset="1" id="stop5" />
+                            </linearGradient>
+                            <linearGradient x1="0" y1="0" x2="1" y2="0" id="linearGradient2998-icon1-desktop"
+                                xlink:href="#linearGradient748-icon1-desktop" gradientUnits="userSpaceOnUse"
+                                gradientTransform="matrix(526.04449,0,0,526.04449,36.979096,326.73637)"
+                                spreadMethod="pad" />
+                            <path
+                                d="M 593.64945,642.24288 H 6.3505502 V 499.97468 L 21.036198,492.1635 V 204.21367 L 171.43311,132.10317 V 75.345119 L 300,7.1878394 428.55102,75.345119 v 56.758051 l 150.39691,72.1105 V 492.1635 l 14.70152,7.81118 z"
+                                style="stroke:#000000;stroke-width:12.7011" id="path5" />
+                            <path
+                                d="M 202.13802,93.761719 V 388.6654 L 300,336.74965 397.86198,388.6654 V 93.761719 L 300,41.925349 Z m 230.57261,312.574091 115.53238,55.4403 V 223.50346 L 432.71063,168.12666 Z M 51.741109,223.50346 V 461.77611 L 167.2735,406.33581 V 168.12666 Z M 36.97608,518.40715 v 93.1467 h 526.03196 v -93.1467 L 300,378.67916 Z"
+                                style="fill:url(#linearGradient2998-icon1-desktop)" id="path6" />
+                        </svg>= Single
                     </li>
                     <li class="flex items-center">
-                        <svg
-                            class="w-6 h-6 block flex-shrink-0"
-                            viewBox="0 0 354.904 485.001"
-                            version="1.1"
-                            id="Layer_1"
-                            enable-background="new 0 0 375 500"
-                            xml:space="preserve"
-                            xmlns="http://www.w3.org/2000/svg"
-                            xmlns:svg="http://www.w3.org/2000/svg"><defs
-                            id="defs48" />
-                    <g
-                    id="g43"
-                    transform="translate(-9.766,-7.079)">
-                        <path
-                    d="m 187.22,56.432 c 43.3,0 59.06,-49.353 59.06,-49.353 l 118.39,93.201 c 0,0 -7.54,178.82 -7.77,185.49 -0.56,15.72 -7.1,30.47 -11.28,40.74 -15.11,36.94 -72.24,116.75 -148.23,165.57 H 177.05 C 101.06,443.26 43.93,363.45 28.83,326.51 24.634,316.24 18.093,301.49 17.543,285.77 17.306,279.09 9.766,100.28 9.766,100.28 L 128.15,7.079 c 0,0 15.76,49.353 59.07,49.353 z"
-                    id="path2" />
-                        
-                            <linearGradient
-                    id="SVGID_1_instance1"
-                    gradientUnits="userSpaceOnUse"
-                    x1="26.257"
-                    y1="247.09"
-                    x2="348.17001"
-                    y2="247.09"
-                    gradientTransform="matrix(1,0,0,-1,0,501)">
-                            <stop
-                    offset="0"
-                    style="stop-color:#BB2C26"
-                    id="stop4" />
-                            <stop
-                    offset="0.0098"
-                    style="stop-color:#BD2F26"
-                    id="stop6" />
-                            <stop
-                    offset="0.1368"
-                    style="stop-color:#D05724"
-                    id="stop8" />
-                            <stop
-                    offset="0.238"
-                    style="stop-color:#DC6F23"
-                    id="stop10" />
-                            <stop
-                    offset="0.3"
-                    style="stop-color:#E07823"
-                    id="stop12" />
-                            <stop
-                    offset="0.3053"
-                    style="stop-color:#E17A23"
-                    id="stop14" />
-                            <stop
-                    offset="0.3616"
-                    style="stop-color:#EE8B1F"
-                    id="stop16" />
-                            <stop
-                    offset="0.4232"
-                    style="stop-color:#F5951E"
-                    id="stop18" />
-                            <stop
-                    offset="0.5"
-                    style="stop-color:#F7981D"
-                    id="stop20" />
-                            <stop
-                    offset="0.5768"
-                    style="stop-color:#F5951E"
-                    id="stop22" />
-                            <stop
-                    offset="0.6384"
-                    style="stop-color:#EE8B1F"
-                    id="stop24" />
-                            <stop
-                    offset="0.6947"
-                    style="stop-color:#E17A23"
-                    id="stop26" />
-                            <stop
-                    offset="0.7"
-                    style="stop-color:#E07823"
-                    id="stop28" />
-                            <stop
-                    offset="0.762"
-                    style="stop-color:#DC6F23"
-                    id="stop30" />
-                            <stop
-                    offset="0.8632"
-                    style="stop-color:#D05724"
-                    id="stop32" />
-                            <stop
-                    offset="0.9902"
-                    style="stop-color:#BD2F26"
-                    id="stop34" />
-                            <stop
-                    offset="1"
-                    style="stop-color:#BB2C26"
-                    id="stop36" />
-                        </linearGradient>
-                        <path
-                    fill="url(#SVGID_1_instance1)"
-                    d="M 181.83,476.5 C 94.47,417.26 43.611,329.91 40.619,312.56 c -1.995,-11.57 -1.199,-21.75 2.396,-30.53 8.374,26.33 24.728,56.25 49.063,89.76 26.042,34.72 51.882,59.11 77.542,73.14 h 35.2 c 25.64,-14.03 51.49,-38.41 77.54,-73.14 24.33,-33.51 40.69,-63.43 49.06,-89.76 v 0 c 3.58,8.78 4.39,18.96 2.39,30.53 -2.99,17.35 -53.85,104.7 -141.21,163.94 z m 5.39,-397.912 -14.96,44.282 -52.66,31.11 -46.671,-11.96 32.311,37.1 v 62.23 l -32.311,37.1 47.271,-12.58 51.46,31.72 15.56,49.06 15.56,-49.06 51.46,-31.72 47.27,12.58 -32.32,-37.1 v -62.23 l 32.32,-37.1 -46.68,11.96 -52.65,-31.11 z M 26.257,127.06 c 37.517,50.94 39.847,96.61 6.991,137 l -1.009,1.22 z m 321.913,0 -5.99,138.21 -1,-1.22 C 308.33,223.67 310.66,178 348.17,127.06 Z M 174.05,430.42 C 117.41,391.34 76.917,336.48 52.587,265.87 84.183,222.04 76.676,169.21 30.075,107.39 l -1.425,-1.87 93.95,-74.2 c 13.42,27.65 34.67,41.215 63.73,40.704 h 0.89 0.88 c 29.07,0.512 50.31,-13.053 63.74,-40.704 l 93.95,74.2 -1.42,1.87 c -46.61,61.82 -54.11,114.65 -22.52,158.48 -24.34,70.61 -64.82,125.47 -121.47,164.55 z"
-                    id="path39"
-                    style="fill:url(#SVGID_1_instance1)" />
-                        <polygon
-                    fill="#ffffff"
-                    points="250.64,246.73 187.22,285.62 123.79,246.73 123.79,173.13 187.22,134.84 250.64,173.13 "
-                    id="polygon41" />
-                    </g>
-                    </svg>= Background
+                        <svg class="w-6 h-6 block flex-shrink-0" viewBox="0 0 354.904 485.001" version="1.1" id="Layer_1"
+                            enable-background="new 0 0 375 500" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:svg="http://www.w3.org/2000/svg">
+                            <defs id="defs48" />
+                            <g id="g43" transform="translate(-9.766,-7.079)">
+                                <path
+                                    d="m 187.22,56.432 c 43.3,0 59.06,-49.353 59.06,-49.353 l 118.39,93.201 c 0,0 -7.54,178.82 -7.77,185.49 -0.56,15.72 -7.1,30.47 -11.28,40.74 -15.11,36.94 -72.24,116.75 -148.23,165.57 H 177.05 C 101.06,443.26 43.93,363.45 28.83,326.51 24.634,316.24 18.093,301.49 17.543,285.77 17.306,279.09 9.766,100.28 9.766,100.28 L 128.15,7.079 c 0,0 15.76,49.353 59.07,49.353 z"
+                                    id="path2" />
+
+                                <linearGradient id="SVGID_1_instance1_desktop" gradientUnits="userSpaceOnUse" x1="26.257"
+                                    y1="247.09" x2="348.17001" y2="247.09" gradientTransform="matrix(1,0,0,-1,0,501)">
+                                    <stop offset="0" style="stop-color:#BB2C26" id="stop4" />
+                                    <stop offset="0.0098" style="stop-color:#BD2F26" id="stop6" />
+                                    <stop offset="0.1368" style="stop-color:#D05724" id="stop8" />
+                                    <stop offset="0.238" style="stop-color:#DC6F23" id="stop10" />
+                                    <stop offset="0.3" style="stop-color:#E07823" id="stop12" />
+                                    <stop offset="0.3053" style="stop-color:#E17A23" id="stop14" />
+                                    <stop offset="0.3616" style="stop-color:#EE8B1F" id="stop16" />
+                                    <stop offset="0.4232" style="stop-color:#F5951E" id="stop18" />
+                                    <stop offset="0.5" style="stop-color:#F7981D" id="stop20" />
+                                    <stop offset="0.5768" style="stop-color:#F5951E" id="stop22" />
+                                    <stop offset="0.6384" style="stop-color:#EE8B1F" id="stop24" />
+                                    <stop offset="0.6947" style="stop-color:#E17A23" id="stop26" />
+                                    <stop offset="0.7" style="stop-color:#E07823" id="stop28" />
+                                    <stop offset="0.762" style="stop-color:#DC6F23" id="stop30" />
+                                    <stop offset="0.8632" style="stop-color:#D05724" id="stop32" />
+                                    <stop offset="0.9902" style="stop-color:#BD2F26" id="stop34" />
+                                    <stop offset="1" style="stop-color:#BB2C26" id="stop36" />
+                                </linearGradient>
+                                <path fill="url(#SVGID_1_instance1_desktop)"
+                                    d="M 181.83,476.5 C 94.47,417.26 43.611,329.91 40.619,312.56 c -1.995,-11.57 -1.199,-21.75 2.396,-30.53 8.374,26.33 24.728,56.25 49.063,89.76 26.042,34.72 51.882,59.11 77.542,73.14 h 35.2 c 25.64,-14.03 51.49,-38.41 77.54,-73.14 24.33,-33.51 40.69,-63.43 49.06,-89.76 v 0 c 3.58,8.78 4.39,18.96 2.39,30.53 -2.99,17.35 -53.85,104.7 -141.21,163.94 z m 5.39,-397.912 -14.96,44.282 -52.66,31.11 -46.671,-11.96 32.311,37.1 v 62.23 l -32.311,37.1 47.271,-12.58 51.46,31.72 15.56,49.06 15.56,-49.06 51.46,-31.72 47.27,12.58 -32.32,-37.1 v -62.23 l 32.32,-37.1 -46.68,11.96 -52.65,-31.11 z M 26.257,127.06 c 37.517,50.94 39.847,96.61 6.991,137 l -1.009,1.22 z m 321.913,0 -5.99,138.21 -1,-1.22 C 308.33,223.67 310.66,178 348.17,127.06 Z M 174.05,430.42 C 117.41,391.34 76.917,336.48 52.587,265.87 84.183,222.04 76.676,169.21 30.075,107.39 l -1.425,-1.87 93.95,-74.2 c 13.42,27.65 34.67,41.215 63.73,40.704 h 0.89 0.88 c 29.07,0.512 50.31,-13.053 63.74,-40.704 l 93.95,74.2 -1.42,1.87 c -46.61,61.82 -54.11,114.65 -22.52,158.48 -24.34,70.61 -64.82,125.47 -121.47,164.55 z"
+                                    id="path39" style="fill:url(#SVGID_1_instance1_desktop)" />
+                                <polygon fill="#ffffff"
+                                    points="250.64,246.73 187.22,285.62 123.79,246.73 123.79,173.13 187.22,134.84 250.64,173.13 "
+                                    id="polygon41" />
+                            </g>
+                        </svg>= Background
                     </li>
                 </ul>
-                </div>
             </div>
 
-        <div class="flex justify-center mt-4">
+            <!-- <div> -->
+                <!-- block #2 -->
+            <!-- </div> -->
 
-            <div class="relative inline-flex flex-col sm:flex-row items-center">
-                
-                <div id="card-spinner" class="hidden absolute inset-0 flex items-center justify-center bg-black bg-opacity-40 z-10">
-                    <div class="animate-spin h-10 w-10 border-4 border-blue-500 border-t-transparent rounded-full"></div>
-                </div>
-                <a id="default" href="#" class="inline-block">
-                <img 
-                    id="default-card" 
-                    src="https://backs.scryfall.io/large/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg?1677416389" 
-                    alt="Back face of Magic Card"
-                    class="h-[70vh] w-auto max-w-[90vw] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px] rounded-lg shadow-lg"
-                    >
-                </a>
+            <!-- <div> -->
+                <!-- block #3 -->
+            <!-- </div> -->
 
-                <a id="card-link" href="#" target="_blank" class="hidden inline-block">
-                <img 
-                    id="card-image" 
-                    src="" 
-                    alt="Card Image"
-                    class="h-[70vh] w-auto max-w-[90vw] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px] rounded-lg shadow-lg"
-                    >
-                </a>
-
-                <a id="partner-1-link" href="#" target="_blank" class="hidden inline-block mr-2 last:mr-0">
-                    <img 
-                        id="partner-1-image" 
-                        src="" 
-                        alt="Card Image"
-                        class="h-[70vh] w-auto max-w-[90vw] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px] rounded-lg shadow-lg"
-                    >
-                </a>
-
-                <a id="partner-2-link" href="#" target="_blank" class="hidden inline-block">
-                    <img 
-                        id="partner-2-image" 
-                        src="" 
-                        alt="Card Image"
-                        class="h-[70vh] w-auto max-w-[90vw] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px] rounded-lg shadow-lg"
-                    >
-                </a>
-
-                <a id="bkgr-cmdr-link" href="#" target="_blank" class="hidden inline-block mr-2 last:mr-0">
-                    <img 
-                        id="bkgr-cmdr-image" 
-                        src="" 
-                        alt="Card Image"
-                        class="h-[70vh] w-auto max-w-[90vw] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px] rounded-lg shadow-lg"
-                    >
-                </a>
-
-                <a id="bkgr-link" href="#" target="_blank" class="hidden inline-block">
-                    <img 
-                        id="bkgr-image" 
-                        src="" 
-                        alt="Card Image"
-                        class="h-[70vh] w-auto max-w-[90vw] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px] rounded-lg shadow-lg"
-                    >
-                </a>
-            </div>
         </div>
+    </div>
+    <div class="flex justify-center mt-4">
 
-        <div type="button" class="flex justify-center mt-4">
-            <button 
-                class="flex items-center justify-center text-white bg-brand hover:bg-brand-900 focus:outline-none focus:ring-4 focus:ring-brand-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-brand-800 dark:hover:bg-brand-700 dark:focus:ring-brand-700 dark:border-brand-700" 
-                id="random-partner-btn">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                    viewBox="0 0 138.38248 206.14454"
-                    preserveAspectRatio="xMidYMid meet"
-                    class="w-6 h-6 block flex-shrink-0"
-                    role="img"
-                    aria-hidden="true"
-                >
-                    <defs>
+        <div class="relative inline-flex flex-col sm:flex-row items-center">
+
+            <div id="card-spinner"
+                class="hidden absolute inset-0 flex items-center justify-center bg-black bg-opacity-40 z-10">
+                <div class="animate-spin h-10 w-10 border-4 border-blue-500 border-t-transparent rounded-full"></div>
+            </div>
+            <a id="default" href="#" class="inline-block">
+                <img id="default-card"
+                    src="https://backs.scryfall.io/large/2/2/222b7a3b-2321-4d4c-af19-19338b134971.jpg?1677416389"
+                    alt="Back face of Magic Card"
+                    class="h-[70vh] w-auto max-w-[90vw] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px] rounded-lg shadow-lg">
+            </a>
+
+            <a id="card-link" href="#" target="_blank" class="hidden inline-block">
+                <img id="card-image" src="" alt="Card Image"
+                    class="h-[70vh] w-auto max-w-[90vw] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px] rounded-lg shadow-lg">
+            </a>
+
+            <a id="partner-1-link" href="#" target="_blank" class="hidden inline-block mr-2 last:mr-0">
+                <img id="partner-1-image" src="" alt="Card Image"
+                    class="h-[70vh] w-auto max-w-[90vw] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px] rounded-lg shadow-lg">
+            </a>
+
+            <a id="partner-2-link" href="#" target="_blank" class="hidden inline-block">
+                <img id="partner-2-image" src="" alt="Card Image"
+                    class="h-[70vh] w-auto max-w-[90vw] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px] rounded-lg shadow-lg">
+            </a>
+
+            <a id="bkgr-cmdr-link" href="#" target="_blank" class="hidden inline-block mr-2 last:mr-0">
+                <img id="bkgr-cmdr-image" src="" alt="Card Image"
+                    class="h-[70vh] w-auto max-w-[90vw] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px] rounded-lg shadow-lg">
+            </a>
+
+            <a id="bkgr-link" href="#" target="_blank" class="hidden inline-block">
+                <img id="bkgr-image" src="" alt="Card Image"
+                    class="h-[70vh] w-auto max-w-[90vw] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px] rounded-lg shadow-lg">
+            </a>
+        </div>
+    </div>
+
+    <div type="button" class="flex justify-center mt-4">
+        <button
+            class="flex items-center justify-center text-white bg-brand hover:bg-brand-900 focus:outline-none focus:ring-4 focus:ring-brand-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-brand-800 dark:hover:bg-brand-700 dark:focus:ring-brand-700 dark:border-brand-700"
+            id="random-partner-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                viewBox="0 0 138.38248 206.14454" preserveAspectRatio="xMidYMid meet"
+                class="w-6 h-6 block flex-shrink-0" role="img" aria-hidden="true">
+                <defs>
                     <linearGradient id="linearGradient4136-icon2">
                         <stop offset="0" style="stop-color:#bf331c" />
                         <stop offset="0.5" style="stop-color:#f6b91d" />
                         <stop offset="1" style="stop-color:#bf331c" />
                     </linearGradient>
 
-                    <linearGradient
-                        id="linearGradient4142-icon2"
-                        xlink:href="#linearGradient4136-icon2"
-                        x1="72.518425"
-                        y1="77.896126"
-                        x2="271.06964"
-                        y2="209.85271"
-                        gradientUnits="userSpaceOnUse"
-                        gradientTransform="translate(-80.808763,-47.558594)"
-                    />
-                    </defs>
+                    <linearGradient id="linearGradient4142-icon2" xlink:href="#linearGradient4136-icon2" x1="72.518425"
+                        y1="77.896126" x2="271.06964" y2="209.85271" gradientUnits="userSpaceOnUse"
+                        gradientTransform="translate(-80.808763,-47.558594)" />
+                </defs>
 
-                    <g transform="rotate(-90,103.07226,103.07227)">
+                <g transform="rotate(-90,103.07226,103.07227)">
                     <g transform="rotate(90,103.07226,103.07227)">
+                        <path style="fill:url(#linearGradient4142-icon2)"
+                            d="m 69.191237,22.980468 -65.6562505,19.023438 5.050781,80.808594 21.0429695,34.17383 39.5625,34.34375 39.562503,-34.34375 21.04297,-34.17383 5.05078,-80.808594 z" />
                         <path
-                        style="fill:url(#linearGradient4142-icon2)"
-                        d="m 69.191237,22.980468 -65.6562505,19.023438 5.050781,80.808594 21.0429695,34.17383 39.5625,34.34375 39.562503,-34.34375 21.04297,-34.17383 5.05078,-80.808594 z"
-                        />
-                        <path
-                        d="m 69.191237,0 c -3.73784,6.630214 -10.66975,13.015198 -18.60352,14.5625 0,0 3.77688,3.861632 7.45899,9.201172 -24.28504,13.447379 -57.71093946,11.33789 -57.71093946,11.33789 0.307232,29.496924 -3.19355404,71.542528 7.07031296,92.591798 11.4338605,23.4487 30.0723665,47.18004 58.5859365,64.31055 l 3.19922,14.14062 3.19922,-14.14062 c 28.513573,-17.13051 47.152083,-40.86185 58.585943,-64.31055 10.26387,-21.04927 6.76308,-63.094874 7.07031,-92.591798 0,0 -33.4259,2.109489 -57.710943,-11.33789 3.68211,-5.33954 7.45899,-9.201172 7.45899,-9.201172 C 79.860987,13.015198 72.929077,6.630214 69.191237,0 Z m -7.05859,30.685547 c 1.67177,3.433135 2.85133,7.030879 2.82812,10.392578 -0.10691,15.483741 -21.95868,18.897171 -41.28711,17.339841 -3.15276,38.4625 -1.69908,55.736084 8.2207,69.814464 9.27755,13.16687 17.53504,22.07708 31.94336,33.91601 l 1.50782,20.89258 C 45.617297,167.3119 33.491007,156.12208 19.697097,135.60547 6.3202825,115.70924 8.1549295,84.581456 7.9119395,43.18164 c 0,0 31.2727175,4.008205 54.2207075,-12.496093 z m 14.11718,0 c 22.94799,16.504298 54.220713,12.496093 54.220713,12.496093 -0.24299,41.399816 1.59166,72.5276 -11.78516,92.42383 -13.79391,20.51661 -25.920203,31.70643 -45.648443,47.43555 l 1.50782,-20.89258 c 14.40832,-11.83893 22.66582,-20.74914 31.943363,-33.91601 9.91979,-14.07838 11.37346,-31.351964 8.2207,-69.814464 -19.328433,1.55733 -41.180203,-1.8561 -41.287113,-17.339841 -0.0232,-3.361699 1.15635,-6.959443 2.82812,-10.392578 z m -46.62109,33.876949 c 0,0 11.35456,6.24214 27.27344,1.51563 l 6.22265,86.203124 c -11.323,-8.14015 -17.36391,-13.66663 -27.39257,-30.54687 -7.35771,-12.3845 -5.87354,-42.604704 -6.10352,-57.171884 z m 79.125003,0 c -0.22998,14.56718 1.25419,44.787384 -6.10352,57.171884 -10.028663,16.88024 -16.069573,22.40672 -27.392573,30.54687 l 6.22265,-86.203124 c 15.91888,4.72651 27.273443,-1.51563 27.273443,-1.51563 z"
-                        />
+                            d="m 69.191237,0 c -3.73784,6.630214 -10.66975,13.015198 -18.60352,14.5625 0,0 3.77688,3.861632 7.45899,9.201172 -24.28504,13.447379 -57.71093946,11.33789 -57.71093946,11.33789 0.307232,29.496924 -3.19355404,71.542528 7.07031296,92.591798 11.4338605,23.4487 30.0723665,47.18004 58.5859365,64.31055 l 3.19922,14.14062 3.19922,-14.14062 c 28.513573,-17.13051 47.152083,-40.86185 58.585943,-64.31055 10.26387,-21.04927 6.76308,-63.094874 7.07031,-92.591798 0,0 -33.4259,2.109489 -57.710943,-11.33789 3.68211,-5.33954 7.45899,-9.201172 7.45899,-9.201172 C 79.860987,13.015198 72.929077,6.630214 69.191237,0 Z m -7.05859,30.685547 c 1.67177,3.433135 2.85133,7.030879 2.82812,10.392578 -0.10691,15.483741 -21.95868,18.897171 -41.28711,17.339841 -3.15276,38.4625 -1.69908,55.736084 8.2207,69.814464 9.27755,13.16687 17.53504,22.07708 31.94336,33.91601 l 1.50782,20.89258 C 45.617297,167.3119 33.491007,156.12208 19.697097,135.60547 6.3202825,115.70924 8.1549295,84.581456 7.9119395,43.18164 c 0,0 31.2727175,4.008205 54.2207075,-12.496093 z m 14.11718,0 c 22.94799,16.504298 54.220713,12.496093 54.220713,12.496093 -0.24299,41.399816 1.59166,72.5276 -11.78516,92.42383 -13.79391,20.51661 -25.920203,31.70643 -45.648443,47.43555 l 1.50782,-20.89258 c 14.40832,-11.83893 22.66582,-20.74914 31.943363,-33.91601 9.91979,-14.07838 11.37346,-31.351964 8.2207,-69.814464 -19.328433,1.55733 -41.180203,-1.8561 -41.287113,-17.339841 -0.0232,-3.361699 1.15635,-6.959443 2.82812,-10.392578 z m -46.62109,33.876949 c 0,0 11.35456,6.24214 27.27344,1.51563 l 6.22265,86.203124 c -11.323,-8.14015 -17.36391,-13.66663 -27.39257,-30.54687 -7.35771,-12.3845 -5.87354,-42.604704 -6.10352,-57.171884 z m 79.125003,0 c -0.22998,14.56718 1.25419,44.787384 -6.10352,57.171884 -10.028663,16.88024 -16.069573,22.40672 -27.392573,30.54687 l 6.22265,-86.203124 c 15.91888,4.72651 27.273443,-1.51563 27.273443,-1.51563 z" />
                     </g>
-                    </g>
-                </svg>
-            </button>
-            <button 
-                class="text-white bg-brand hover:bg-brand-900 focus:outline-none focus:ring-4 focus:ring-brand-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-brand-800 dark:hover:bg-brand-700 dark:focus:ring-brand-700 dark:border-brand-700" 
-                id="random-btn">
-                <svg
-                    viewBox="0 0 600 648" class="w-6 h-6"
-                    version="1.1"
-                    id="svg6"
-                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                    xmlns="http://www.w3.org/2000/svg"
-                    xmlns:svg="http://www.w3.org/2000/svg">
-                    <defs
-                        id="defs6" />
-                    <linearGradient
-                        x1="0"
-                        y1="0"
-                        x2="1"
-                        y2="0"
-                        id="linearGradient748-icon2"
-                        gradientUnits="userSpaceOnUse"
-                        gradientTransform="matrix(33.133789,0,0,-33.133789,216.36719,34.720703)"
-                        spreadMethod="pad">
-                        <stop
-                        style="stop-color:#bf331c"
-                        offset="0"
-                        id="stop1" />
-                        <stop
-                        style="stop-color:#d3641c"
-                        offset="0.39999399"
-                        id="stop2" />
-                        <stop
-                        style="stop-color:#f6b91d"
-                        offset="0.5"
-                        id="stop3" />
-                        <stop
-                        style="stop-color:#d3641c"
-                        offset="0.69999701"
-                        id="stop4" />
-                        <stop
-                        style="stop-color:#bf331c"
-                        offset="1"
-                        id="stop5" />
-                    </linearGradient>
-                    <linearGradient
-                        x1="0"
-                        y1="0"
-                        x2="1"
-                        y2="0"
-                        id="linearGradient2998-icon2"
-                        xlink:href="#linearGradient748-icon2"
-                        gradientUnits="userSpaceOnUse"
-                        gradientTransform="matrix(526.04449,0,0,526.04449,36.979096,326.73637)"
-                        spreadMethod="pad" />
+                </g>
+            </svg>
+        </button>
+        <button
+            class="text-white bg-brand hover:bg-brand-900 focus:outline-none focus:ring-4 focus:ring-brand-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-brand-800 dark:hover:bg-brand-700 dark:focus:ring-brand-700 dark:border-brand-700"
+            id="random-btn">
+            <svg viewBox="0 0 600 648" class="w-6 h-6" version="1.1" id="svg6"
+                xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"
+                xmlns:svg="http://www.w3.org/2000/svg">
+                <defs id="defs6" />
+                <linearGradient x1="0" y1="0" x2="1" y2="0" id="linearGradient748-icon2" gradientUnits="userSpaceOnUse"
+                    gradientTransform="matrix(33.133789,0,0,-33.133789,216.36719,34.720703)" spreadMethod="pad">
+                    <stop style="stop-color:#bf331c" offset="0" id="stop1" />
+                    <stop style="stop-color:#d3641c" offset="0.39999399" id="stop2" />
+                    <stop style="stop-color:#f6b91d" offset="0.5" id="stop3" />
+                    <stop style="stop-color:#d3641c" offset="0.69999701" id="stop4" />
+                    <stop style="stop-color:#bf331c" offset="1" id="stop5" />
+                </linearGradient>
+                <linearGradient x1="0" y1="0" x2="1" y2="0" id="linearGradient2998-icon2"
+                    xlink:href="#linearGradient748-icon2" gradientUnits="userSpaceOnUse"
+                    gradientTransform="matrix(526.04449,0,0,526.04449,36.979096,326.73637)" spreadMethod="pad" />
+                <path
+                    d="M 593.64945,642.24288 H 6.3505502 V 499.97468 L 21.036198,492.1635 V 204.21367 L 171.43311,132.10317 V 75.345119 L 300,7.1878394 428.55102,75.345119 v 56.758051 l 150.39691,72.1105 V 492.1635 l 14.70152,7.81118 z"
+                    style="stroke:#000000;stroke-width:12.7011" id="path5" />
+                <path
+                    d="M 202.13802,93.761719 V 388.6654 L 300,336.74965 397.86198,388.6654 V 93.761719 L 300,41.925349 Z m 230.57261,312.574091 115.53238,55.4403 V 223.50346 L 432.71063,168.12666 Z M 51.741109,223.50346 V 461.77611 L 167.2735,406.33581 V 168.12666 Z M 36.97608,518.40715 v 93.1467 h 526.03196 v -93.1467 L 300,378.67916 Z"
+                    style="fill:url(#linearGradient2998-icon2)" id="path6" />
+            </svg>
+        </button>
+        <button
+            class="text-white bg-brand hover:bg-brand-900 focus:outline-none focus:ring-4 focus:ring-brand-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-brand-800 dark:hover:bg-brand-700 dark:focus:ring-brand-700 dark:border-brand-700"
+            id="random-bkgr-btn">
+            <svg class="w-6 h-6 block flex-shrink-0 mx-auto" viewBox="0 0 354.904 485.001" version="1.1" id="Layer_1"
+                enable-background="new 0 0 375 500" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                xmlns:svg="http://www.w3.org/2000/svg">
+                <defs id="defs48" />
+                <g id="g43" transform="translate(-9.766,-7.079)">
                     <path
-                        d="M 593.64945,642.24288 H 6.3505502 V 499.97468 L 21.036198,492.1635 V 204.21367 L 171.43311,132.10317 V 75.345119 L 300,7.1878394 428.55102,75.345119 v 56.758051 l 150.39691,72.1105 V 492.1635 l 14.70152,7.81118 z"
-                        style="stroke:#000000;stroke-width:12.7011"
-                        id="path5" />
-                    <path
-                        d="M 202.13802,93.761719 V 388.6654 L 300,336.74965 397.86198,388.6654 V 93.761719 L 300,41.925349 Z m 230.57261,312.574091 115.53238,55.4403 V 223.50346 L 432.71063,168.12666 Z M 51.741109,223.50346 V 461.77611 L 167.2735,406.33581 V 168.12666 Z M 36.97608,518.40715 v 93.1467 h 526.03196 v -93.1467 L 300,378.67916 Z"
-                        style="fill:url(#linearGradient2998-icon2)"
-                        id="path6" />
-                    </svg>
-            </button>
-            <button 
-                class="text-white bg-brand hover:bg-brand-900 focus:outline-none focus:ring-4 focus:ring-brand-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-brand-800 dark:hover:bg-brand-700 dark:focus:ring-brand-700 dark:border-brand-700" 
-                id="random-bkgr-btn">
-                <svg
-                    class="w-6 h-6 block flex-shrink-0 mx-auto"
-                    viewBox="0 0 354.904 485.001"
-                    version="1.1"
-                    id="Layer_1"
-                    enable-background="new 0 0 375 500"
-                    xml:space="preserve"
-                    xmlns="http://www.w3.org/2000/svg"
-                    xmlns:svg="http://www.w3.org/2000/svg"><defs
-                    id="defs48" />
-                    <g
-                    id="g43"
-                    transform="translate(-9.766,-7.079)">
-                        <path
-                    d="m 187.22,56.432 c 43.3,0 59.06,-49.353 59.06,-49.353 l 118.39,93.201 c 0,0 -7.54,178.82 -7.77,185.49 -0.56,15.72 -7.1,30.47 -11.28,40.74 -15.11,36.94 -72.24,116.75 -148.23,165.57 H 177.05 C 101.06,443.26 43.93,363.45 28.83,326.51 24.634,316.24 18.093,301.49 17.543,285.77 17.306,279.09 9.766,100.28 9.766,100.28 L 128.15,7.079 c 0,0 15.76,49.353 59.07,49.353 z"
-                    id="path2" />
-                        
-                            <linearGradient
-                    id="SVGID_1_instance2"
-                    gradientUnits="userSpaceOnUse"
-                    x1="26.257"
-                    y1="247.09"
-                    x2="348.17001"
-                    y2="247.09"
-                    gradientTransform="matrix(1,0,0,-1,0,501)">
-                            <stop
-                    offset="0"
-                    style="stop-color:#BB2C26"
-                    id="stop4" />
-                            <stop
-                    offset="0.0098"
-                    style="stop-color:#BD2F26"
-                    id="stop6" />
-                            <stop
-                    offset="0.1368"
-                    style="stop-color:#D05724"
-                    id="stop8" />
-                            <stop
-                    offset="0.238"
-                    style="stop-color:#DC6F23"
-                    id="stop10" />
-                            <stop
-                    offset="0.3"
-                    style="stop-color:#E07823"
-                    id="stop12" />
-                            <stop
-                    offset="0.3053"
-                    style="stop-color:#E17A23"
-                    id="stop14" />
-                            <stop
-                    offset="0.3616"
-                    style="stop-color:#EE8B1F"
-                    id="stop16" />
-                            <stop
-                    offset="0.4232"
-                    style="stop-color:#F5951E"
-                    id="stop18" />
-                            <stop
-                    offset="0.5"
-                    style="stop-color:#F7981D"
-                    id="stop20" />
-                            <stop
-                    offset="0.5768"
-                    style="stop-color:#F5951E"
-                    id="stop22" />
-                            <stop
-                    offset="0.6384"
-                    style="stop-color:#EE8B1F"
-                    id="stop24" />
-                            <stop
-                    offset="0.6947"
-                    style="stop-color:#E17A23"
-                    id="stop26" />
-                            <stop
-                    offset="0.7"
-                    style="stop-color:#E07823"
-                    id="stop28" />
-                            <stop
-                    offset="0.762"
-                    style="stop-color:#DC6F23"
-                    id="stop30" />
-                            <stop
-                    offset="0.8632"
-                    style="stop-color:#D05724"
-                    id="stop32" />
-                            <stop
-                    offset="0.9902"
-                    style="stop-color:#BD2F26"
-                    id="stop34" />
-                            <stop
-                    offset="1"
-                    style="stop-color:#BB2C26"
-                    id="stop36" />
-                        </linearGradient>
-                        <path
-                    fill="url(#SVGID_1_instance2)"
-                    d="M 181.83,476.5 C 94.47,417.26 43.611,329.91 40.619,312.56 c -1.995,-11.57 -1.199,-21.75 2.396,-30.53 8.374,26.33 24.728,56.25 49.063,89.76 26.042,34.72 51.882,59.11 77.542,73.14 h 35.2 c 25.64,-14.03 51.49,-38.41 77.54,-73.14 24.33,-33.51 40.69,-63.43 49.06,-89.76 v 0 c 3.58,8.78 4.39,18.96 2.39,30.53 -2.99,17.35 -53.85,104.7 -141.21,163.94 z m 5.39,-397.912 -14.96,44.282 -52.66,31.11 -46.671,-11.96 32.311,37.1 v 62.23 l -32.311,37.1 47.271,-12.58 51.46,31.72 15.56,49.06 15.56,-49.06 51.46,-31.72 47.27,12.58 -32.32,-37.1 v -62.23 l 32.32,-37.1 -46.68,11.96 -52.65,-31.11 z M 26.257,127.06 c 37.517,50.94 39.847,96.61 6.991,137 l -1.009,1.22 z m 321.913,0 -5.99,138.21 -1,-1.22 C 308.33,223.67 310.66,178 348.17,127.06 Z M 174.05,430.42 C 117.41,391.34 76.917,336.48 52.587,265.87 84.183,222.04 76.676,169.21 30.075,107.39 l -1.425,-1.87 93.95,-74.2 c 13.42,27.65 34.67,41.215 63.73,40.704 h 0.89 0.88 c 29.07,0.512 50.31,-13.053 63.74,-40.704 l 93.95,74.2 -1.42,1.87 c -46.61,61.82 -54.11,114.65 -22.52,158.48 -24.34,70.61 -64.82,125.47 -121.47,164.55 z"
-                    id="path39"
-                    style="fill:url(#SVGID_1_instance2)" />
-                        <polygon
-                    fill="#ffffff"
-                    points="250.64,246.73 187.22,285.62 123.79,246.73 123.79,173.13 187.22,134.84 250.64,173.13 "
-                    id="polygon41" />
-                    </g>
-                    </svg>
-            
-            </button>
-        </div>
+                        d="m 187.22,56.432 c 43.3,0 59.06,-49.353 59.06,-49.353 l 118.39,93.201 c 0,0 -7.54,178.82 -7.77,185.49 -0.56,15.72 -7.1,30.47 -11.28,40.74 -15.11,36.94 -72.24,116.75 -148.23,165.57 H 177.05 C 101.06,443.26 43.93,363.45 28.83,326.51 24.634,316.24 18.093,301.49 17.543,285.77 17.306,279.09 9.766,100.28 9.766,100.28 L 128.15,7.079 c 0,0 15.76,49.353 59.07,49.353 z"
+                        id="path2" />
 
-        <br><br>
-        <footer class="fixed bottom-0 left-0 flex justify-center w-full bg-brand-500">
-            <ul class="text-white text-sm text-center">
-                <li>A BainneBoi Creation</li>
-                <li>If you enjoy this app feel free to tip me on <a href="#"><u>Ko-Fi</u></a></li>
-            </ul>
-        </footer>
+                    <linearGradient id="SVGID_1_instance2" gradientUnits="userSpaceOnUse" x1="26.257" y1="247.09"
+                        x2="348.17001" y2="247.09" gradientTransform="matrix(1,0,0,-1,0,501)">
+                        <stop offset="0" style="stop-color:#BB2C26" id="stop4" />
+                        <stop offset="0.0098" style="stop-color:#BD2F26" id="stop6" />
+                        <stop offset="0.1368" style="stop-color:#D05724" id="stop8" />
+                        <stop offset="0.238" style="stop-color:#DC6F23" id="stop10" />
+                        <stop offset="0.3" style="stop-color:#E07823" id="stop12" />
+                        <stop offset="0.3053" style="stop-color:#E17A23" id="stop14" />
+                        <stop offset="0.3616" style="stop-color:#EE8B1F" id="stop16" />
+                        <stop offset="0.4232" style="stop-color:#F5951E" id="stop18" />
+                        <stop offset="0.5" style="stop-color:#F7981D" id="stop20" />
+                        <stop offset="0.5768" style="stop-color:#F5951E" id="stop22" />
+                        <stop offset="0.6384" style="stop-color:#EE8B1F" id="stop24" />
+                        <stop offset="0.6947" style="stop-color:#E17A23" id="stop26" />
+                        <stop offset="0.7" style="stop-color:#E07823" id="stop28" />
+                        <stop offset="0.762" style="stop-color:#DC6F23" id="stop30" />
+                        <stop offset="0.8632" style="stop-color:#D05724" id="stop32" />
+                        <stop offset="0.9902" style="stop-color:#BD2F26" id="stop34" />
+                        <stop offset="1" style="stop-color:#BB2C26" id="stop36" />
+                    </linearGradient>
+                    <path fill="url(#SVGID_1_instance2)"
+                        d="M 181.83,476.5 C 94.47,417.26 43.611,329.91 40.619,312.56 c -1.995,-11.57 -1.199,-21.75 2.396,-30.53 8.374,26.33 24.728,56.25 49.063,89.76 26.042,34.72 51.882,59.11 77.542,73.14 h 35.2 c 25.64,-14.03 51.49,-38.41 77.54,-73.14 24.33,-33.51 40.69,-63.43 49.06,-89.76 v 0 c 3.58,8.78 4.39,18.96 2.39,30.53 -2.99,17.35 -53.85,104.7 -141.21,163.94 z m 5.39,-397.912 -14.96,44.282 -52.66,31.11 -46.671,-11.96 32.311,37.1 v 62.23 l -32.311,37.1 47.271,-12.58 51.46,31.72 15.56,49.06 15.56,-49.06 51.46,-31.72 47.27,12.58 -32.32,-37.1 v -62.23 l 32.32,-37.1 -46.68,11.96 -52.65,-31.11 z M 26.257,127.06 c 37.517,50.94 39.847,96.61 6.991,137 l -1.009,1.22 z m 321.913,0 -5.99,138.21 -1,-1.22 C 308.33,223.67 310.66,178 348.17,127.06 Z M 174.05,430.42 C 117.41,391.34 76.917,336.48 52.587,265.87 84.183,222.04 76.676,169.21 30.075,107.39 l -1.425,-1.87 93.95,-74.2 c 13.42,27.65 34.67,41.215 63.73,40.704 h 0.89 0.88 c 29.07,0.512 50.31,-13.053 63.74,-40.704 l 93.95,74.2 -1.42,1.87 c -46.61,61.82 -54.11,114.65 -22.52,158.48 -24.34,70.61 -64.82,125.47 -121.47,164.55 z"
+                        id="path39" style="fill:url(#SVGID_1_instance2)" />
+                    <polygon fill="#ffffff"
+                        points="250.64,246.73 187.22,285.62 123.79,246.73 123.79,173.13 187.22,134.84 250.64,173.13 "
+                        id="polygon41" />
+                </g>
+            </svg>
+
+        </button>
+    </div>
+
+    <br><br>
+    <footer class="fixed bottom-0 left-0 flex justify-center w-full bg-brand-500">
+        <ul class="text-white text-sm text-center">
+            <li>A BainneBoi Creation</li>
+            <li>If you enjoy this app feel free to tip me on <a href="#"><u>Ko-Fi</u></a></li>
+        </ul>
+    </footer>
 </body>
 <script>
     // Vars for backend deployment (Render)
     const API_BASE = ["localhost", "127.0.0.1"].includes(window.location.hostname)
-    ? "http://localhost:5000"
-    : "https://cmdr-app.onrender.com";
+        ? "http://localhost:5000"
+        : "https://cmdr-app.onrender.com";
 
-    
+
     const defaultImage = document.getElementById("default");
 
     // Vars for regular commander
@@ -593,126 +437,127 @@
     // Optional: close if click outside
     document.addEventListener("click", (e) => {
         if (!menu.contains(e.target) && !btn.contains(e.target)) {
-        menu.classList.add("hidden");
+            menu.classList.add("hidden");
         }
     });
 
-    document.getElementById("random-btn").addEventListener("click", function() {
-            showLoading();
+    document.getElementById("random-btn").addEventListener("click", function () {
+        showLoading();
 
-            fetch(`${API_BASE}/get-card`)
-                .then(response => response.json())
-                .then(data => {
-                    console.log("Data received from /get-card:", data);
-                    if (data.card_url && data.scryfall_url && data.small_card_url) {
-                        cardLink.href = data.scryfall_url;
+        fetch(`${API_BASE}/get-card`)
+            .then(response => response.json())
+            .then(data => {
+                console.log("Data received from /get-card:", data);
+                if (data.card_url && data.scryfall_url && data.small_card_url) {
+                    cardLink.href = data.scryfall_url;
 
-                        const imgSrc = window.innerWidth < 768 ? data.small_card_url : data.card_url;
+                    const imgSrc = window.innerWidth < 768 ? data.small_card_url : data.card_url;
 
-                        cardImage.onload = () => hideLoading();
-                        cardImage.src = imgSrc;
+                    cardImage.onload = () => hideLoading();
+                    cardImage.src = imgSrc;
 
-                        defaultImage.classList.add("hidden");
-                        cardLink.classList.remove("hidden");
-                        cardLink_1.classList.add("hidden");
-                        cardLink_2.classList.add("hidden");
-                        bkgrCmdrLink.classList.add("hidden");
-                        bkgrLink.classList.add("hidden");
-                    } else {
-                        alert("Error fetching card.");
-                        hideLoading();
-                    }
-                })
-                .catch(error => {
+                    defaultImage.classList.add("hidden");
+                    cardLink.classList.remove("hidden");
+                    cardLink_1.classList.add("hidden");
+                    cardLink_2.classList.add("hidden");
+                    bkgrCmdrLink.classList.add("hidden");
+                    bkgrLink.classList.add("hidden");
+                } else {
+                    alert("Error fetching card.");
+                    hideLoading();
+                }
+            })
+            .catch(error => {
                 console.error("Error:", error);
                 hideLoading();
-                });
-        });
-    
-    document.getElementById("random-partner-btn").addEventListener("click", function() {
-            showLoading();
+            });
+    });
 
-            fetch(`${API_BASE}/get-partner`)
-                .then(response => response.json())
-                .then(data => {
-                    console.log("Data received from /get-partner:", data);
-                    if (data.partner_1_url && data.small_card_1_url && data.partner_1_scryfall && data.partner_2_url && data.small_card_2_url && data.partner_2_scryfall) {
-                        cardLink_1.href = data.partner_1_scryfall;
-                        cardLink_2.href = data.partner_2_scryfall;
+    document.getElementById("random-partner-btn").addEventListener("click", function () {
+        showLoading();
 
-                        let loaded = 0;
-                        const checkDone = () => {
-                            loaded++;
-                            if (loaded === 2) hideLoading();
-                        }
+        fetch(`${API_BASE}/get-partner`)
+            .then(response => response.json())
+            .then(data => {
+                console.log("Data received from /get-partner:", data);
+                if (data.partner_1_url && data.small_card_1_url && data.partner_1_scryfall && data.partner_2_url && data.small_card_2_url && data.partner_2_scryfall) {
+                    cardLink_1.href = data.partner_1_scryfall;
+                    cardLink_2.href = data.partner_2_scryfall;
 
-                        const imgSrc_1 = window.innerWidth < 768 ? data.small_card_1_url : data.partner_1_url;
-                        const imgSrc_2 = window.innerWidth < 768 ? data.small_card_2_url : data.partner_2_url;
-
-                        cardImage_1.onload = checkDone;
-                        cardImage_2.onload = checkDone;
-
-                        cardImage_1.src = imgSrc_1;
-                        cardImage_2.src = imgSrc_2;
-
-                        defaultImage.classList.add("hidden");
-                        cardLink.classList.add("hidden");
-                        cardLink_1.classList.remove("hidden");
-                        cardLink_2.classList.remove("hidden");
-                        bkgrCmdrLink.classList.add("hidden");
-                        bkgrLink.classList.add("hidden");
-                    } else {
-                        alert("Error fetching card.");
-                        hideLoading();
+                    let loaded = 0;
+                    const checkDone = () => {
+                        loaded++;
+                        if (loaded === 2) hideLoading();
                     }
-                })
-                .catch(error => {
+
+                    const imgSrc_1 = window.innerWidth < 768 ? data.small_card_1_url : data.partner_1_url;
+                    const imgSrc_2 = window.innerWidth < 768 ? data.small_card_2_url : data.partner_2_url;
+
+                    cardImage_1.onload = checkDone;
+                    cardImage_2.onload = checkDone;
+
+                    cardImage_1.src = imgSrc_1;
+                    cardImage_2.src = imgSrc_2;
+
+                    defaultImage.classList.add("hidden");
+                    cardLink.classList.add("hidden");
+                    cardLink_1.classList.remove("hidden");
+                    cardLink_2.classList.remove("hidden");
+                    bkgrCmdrLink.classList.add("hidden");
+                    bkgrLink.classList.add("hidden");
+                } else {
+                    alert("Error fetching card.");
+                    hideLoading();
+                }
+            })
+            .catch(error => {
                 console.error("Error:", error);
                 hideLoading();
-                });
-        });
+            });
+    });
 
-        document.getElementById("random-bkgr-btn").addEventListener("click", function() {
-            showLoading();
+    document.getElementById("random-bkgr-btn").addEventListener("click", function () {
+        showLoading();
 
-            fetch(`${API_BASE}/get-bkgr`)
-                .then(response => response.json())
-                .then(data => {
-                    console.log("Data received from /get-bkgr:", data);
-                    if (data.bkgr_cmdr && data.bkgr_cmdr_scryfall && data.bkgr && data.bkgr_scryfall) {
-                        bkgrCmdrLink.href = data.bkgr_cmdr_scryfall;
-                        bkgrLink.href = data.bkgr_scryfall;
+        fetch(`${API_BASE}/get-bkgr`)
+            .then(response => response.json())
+            .then(data => {
+                console.log("Data received from /get-bkgr:", data);
+                if (data.bkgr_cmdr && data.bkgr_cmdr_scryfall && data.bkgr && data.bkgr_scryfall) {
+                    bkgrCmdrLink.href = data.bkgr_cmdr_scryfall;
+                    bkgrLink.href = data.bkgr_scryfall;
 
-                        let loaded = 0;
-                        const checkDone = () => {
-                            loaded++;
-                            if (loaded === 2) hideLoading();
-                        }
-
-                        const imgSrc_1 = window.innerWidth < 768 ? data.small_bkgr_cmdr : data.bkgr_cmdr;
-                        const imgSrc_2 = window.innerWidth < 768 ? data.small_bkgr : data.bkgr;
-
-                        bkgrCmdrImage.onload = checkDone;
-                        bkgrImage.onload = checkDone;
-
-                        bkgrCmdrImage.src = imgSrc_1;
-                        bkgrImage.src = imgSrc_2;
-
-                        defaultImage.classList.add("hidden");
-                        cardLink.classList.add("hidden");
-                        cardLink_1.classList.add("hidden");
-                        cardLink_2.classList.add("hidden");
-                        bkgrCmdrLink.classList.remove("hidden");
-                        bkgrLink.classList.remove("hidden");
-                    } else {
-                        alert("Error fetching card.");
-                        hideLoading();
+                    let loaded = 0;
+                    const checkDone = () => {
+                        loaded++;
+                        if (loaded === 2) hideLoading();
                     }
-                })
-                .catch(error => {
+
+                    const imgSrc_1 = window.innerWidth < 768 ? data.small_bkgr_cmdr : data.bkgr_cmdr;
+                    const imgSrc_2 = window.innerWidth < 768 ? data.small_bkgr : data.bkgr;
+
+                    bkgrCmdrImage.onload = checkDone;
+                    bkgrImage.onload = checkDone;
+
+                    bkgrCmdrImage.src = imgSrc_1;
+                    bkgrImage.src = imgSrc_2;
+
+                    defaultImage.classList.add("hidden");
+                    cardLink.classList.add("hidden");
+                    cardLink_1.classList.add("hidden");
+                    cardLink_2.classList.add("hidden");
+                    bkgrCmdrLink.classList.remove("hidden");
+                    bkgrLink.classList.remove("hidden");
+                } else {
+                    alert("Error fetching card.");
+                    hideLoading();
+                }
+            })
+            .catch(error => {
                 console.error("Error:", error);
                 hideLoading();
-                });
-        });
+            });
+    });
 </script>
+
 </html>

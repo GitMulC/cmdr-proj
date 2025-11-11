@@ -7,7 +7,7 @@
     * `python app.py`
 
 2. Tailwind - CSS
-    * `cd backend/`
+    * `cd frontend/`
     * `npm install`
     * `npm run build:css`
     * `npx tailwindcss -i ./src/input.css -o ./static/css/style.css --minify` (For deployment, generates css & removes whitespaces)
