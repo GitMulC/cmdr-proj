@@ -1,4 +1,6 @@
 venv/
 __pycahce
 __pycache__/app.cpython-310.pyc
+app.cpython-310
 node_modules/
+*.pyc
