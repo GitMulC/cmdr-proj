@@ -14,6 +14,8 @@
 
 3. Testing
     * `pytest -v / python3 -m pytest -v`
+    * `python3 -m pytest tests/unit`
+    * `python3 -m pytest --last-failed`
 
 
 ### Sponsors
