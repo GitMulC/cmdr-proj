@@ -9,6 +9,6 @@ services:
   - name: frontend
     type: static
     rootDir: frontend
-    buildCommand: npm install && npm run build
+    buildCommand: cp -R static templates/static && npm install && npm run build
     staticPublishPath: templates
     plan: free
