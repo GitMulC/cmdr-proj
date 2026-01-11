@@ -10,5 +10,5 @@ services:
     type: static
     rootDir: frontend
     buildCommand: npm install && npm run build
-    staticPublishPath: templates
+    staticPublishPath: .
     plan: free
