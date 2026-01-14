@@ -4,7 +4,7 @@
 1. Flask - venv
     * `cd backend/`
     * `source venv/bin/activate`
-    * `python app.py`
+    * `python3 app.py`
 
 2. Tailwind - CSS
     * `cd frontend/`
